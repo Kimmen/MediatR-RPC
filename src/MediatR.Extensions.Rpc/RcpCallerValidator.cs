@@ -5,13 +5,22 @@ using MediatR;
 
 namespace Mediatr.Rpc
 {
+    /// <summary>
+    /// Holds helpers validation methods for <see cref="RpcCaller"/>.
+    /// </summary>
     internal static class RcpCallerValidator
     {
+        /// <summary>
+        /// Validates <see cref="ISender"/> object.
+        /// </summary>
         public static void ValidateSender(ISender sender)
         {
             AssertHelper.ValidateIsNotNull(sender, nameof(sender));
         }
 
+        /// <summary>
+        /// Validates <see cref="RpcOptions"/> object.
+        /// </summary>
         public static void ValidateOptions(RpcOptions options)
         {
             AssertHelper.ValidateIsNotNull(options.Requests, nameof(options.Requests));

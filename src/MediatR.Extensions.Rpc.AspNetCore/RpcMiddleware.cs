@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace MediatR.Rpc.AspNetCore
 {
+    /// <summary>
+    /// Middleware for handling the HTTP routing.
+    /// </summary>
     internal class RpcMiddleware
     {
 #pragma warning disable IDE0052 //Needed for the class to be created as a Middlware. Keep it around for later use.
@@ -57,7 +60,7 @@ namespace MediatR.Rpc.AspNetCore
             var requestName = requestNameValue.ToString() ?? string.Empty;
             var result = await rpcCaller.Process(requestName, (t, ct) => options.DeserializeRequest(t, context, ct), cancellationToken);
 
-            if (result.FoundHandler)
+            if (result.RequestFound)
             {
                 await options.HandlResponse(result.Response, context, cancellationToken);
             }

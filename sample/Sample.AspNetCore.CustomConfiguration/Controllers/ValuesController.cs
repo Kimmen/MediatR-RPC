@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sample.AspNetCore.CustomConfiguration.Controllers
 {
@@ -12,5 +8,10 @@ namespace Sample.AspNetCore.CustomConfiguration.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        [HttpPost("process")]
+        public IActionResult Process()
+        {
+            return Ok(new Random().NextDouble());
+        }
     }
 }

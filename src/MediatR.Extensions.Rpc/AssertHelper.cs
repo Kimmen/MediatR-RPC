@@ -2,6 +2,9 @@
 
 namespace Mediatr.Rpc
 {
+    /// <summary>
+    /// Helper methods for validating for consistent messages.
+    /// </summary>
     internal static class AssertHelper
     {
         public static void ValidateIsNotNull(object value, string propName)

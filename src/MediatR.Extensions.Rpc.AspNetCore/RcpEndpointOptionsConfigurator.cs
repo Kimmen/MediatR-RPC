@@ -6,8 +6,17 @@ using Microsoft.AspNetCore.Http;
 
 namespace MediatR.Rpc.AspNetCore
 {
+    /// <summary>
+    /// Standard configurations for the RPC endpoint.
+    /// </summary>
     public static class RcpEndpointOptionsConfigurator
     {
+        /// <summary>
+        /// Use <see cref="System.Text.Json.JsonSerializer"/> for deserializing requests and serializing responses.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <param name="jsonOptions">Optional custom serialization settings.</param>
+        /// <returns>The updated options.</returns>
         public static RpcEndpointOptions SerializeWithSystemJson(this RpcEndpointOptions options, JsonSerializerOptions? jsonOptions = null)
         {
             jsonOptions ??= new JsonSerializerOptions();
@@ -41,6 +50,11 @@ namespace MediatR.Rpc.AspNetCore
             return options;
         }
 
+        /// <summary>
+        /// Respond any unmatched requests with HttpStatus 404 - NotFound.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The updated options.</returns>
         public static RpcEndpointOptions UnmatchedRequestsAs404NotFound(this RpcEndpointOptions options)
         {
             options.UnmatchedRequest = (requestName, context, cancellationToken) =>
@@ -52,6 +66,11 @@ namespace MediatR.Rpc.AspNetCore
             return options;
         }
 
+        /// <summary>
+        /// Respond any successful requests with HttpStatus 200 - OK and serialized response object.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>The updated options.</returns>
         public static RpcEndpointOptions ResponsesAs200Ok(this RpcEndpointOptions options)
         {
             options.HandlResponse = async (value, context, cancellationToken) =>

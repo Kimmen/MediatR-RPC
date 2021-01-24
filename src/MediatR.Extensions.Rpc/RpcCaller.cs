@@ -6,6 +6,9 @@ using MediatR;
 
 namespace Mediatr.Rpc
 {
+    /// <summary>
+    /// Finds corresponding requests and process them. 
+    /// </summary>
     public class RpcCaller
     {
         private readonly ISender sender;
@@ -20,7 +23,14 @@ namespace Mediatr.Rpc
             this.requestTypeProvider = new LinearSearchRequestTypeProvider(options.Requests, options.MatchingConvention);
         }
 
-        public async Task<Result> Process(string requestName, Func<Type, CancellationToken, Task<object>> requestDeserializer, CancellationToken cancellationToken)
+        /// <summary>
+        /// Finds, instantiates and process requests that corresponds to the specified name.
+        /// </summary>
+        /// <param name="requestName">The name of the requests to process</param>
+        /// <param name="requestDeserializer">Deserializer the requests.</param>
+        /// <param name="cancellationToken">Optional Cancellation token.</param>
+        /// <returns>Result indicating how the request was processed, containing the response if successful.</returns>
+        public async Task<Result> Process(string requestName, Func<Type, CancellationToken, Task<object>> requestDeserializer, CancellationToken cancellationToken = default)
         {
             if (false == this.requestTypeProvider.TryGetByName(requestName, out var matchedRequestType))
             {
@@ -33,16 +43,25 @@ namespace Mediatr.Rpc
             return Result.Ok(response);
         }
 
+        /// <summary>
+        /// Result of request process.
+        /// </summary>
         public struct Result
         {
-            public bool FoundHandler { get; internal set; }
+            /// <summary>
+            /// True if there was a corresponding request; otherwise false.
+            /// </summary>
+            public bool RequestFound { get; internal set; }
+            /// <summary>
+            /// The response of request process.
+            /// </summary>
             public object? Response { get; internal set; }
 
             internal static Result Ok(object? response)
             {
                 return new Result
                 {
-                    FoundHandler = true,
+                    RequestFound = true,
                     Response = response
                 };
             }
@@ -51,7 +70,7 @@ namespace Mediatr.Rpc
             {
                 return new Result
                 {
-                    FoundHandler = false,
+                    RequestFound = false,
                     Response = null
                 };
             }

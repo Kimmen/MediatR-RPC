@@ -2,6 +2,9 @@
 
 namespace MediatR.Rpc.AspNetCore
 {
+    /// <summary>
+    /// Helper methods for validating for consistent messages.
+    /// </summary>
     internal static class AssertHelper
     {
         public static void ValidateIsNotNull(object o, string propName)

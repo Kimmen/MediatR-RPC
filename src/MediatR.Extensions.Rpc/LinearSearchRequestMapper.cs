@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Mediatr.Rpc
 {
+    /// <summary>
+    /// Finds request types given a name. Will do a linear search through all requests.
+    /// </summary>
     internal class LinearSearchRequestTypeProvider
     {
         private readonly IEnumerable<Type> requestTypes;
@@ -15,6 +18,12 @@ namespace Mediatr.Rpc
             this.resolveRequestName = resolveRequestName;
         }
 
+        /// <summary>
+        /// Finds a request type that corresponds to a specified name. A return value indicates if found.
+        /// </summary>
+        /// <param name="name">Name to match a request type with.</param>
+        /// <param name="requestType">The corresponding request type, if found.</param>
+        /// <returns>True if a request was found for the corresponding name; otherwise false.</returns>
         public bool TryGetByName(string name, out Type requestType)
         {
             requestType = this.requestTypes

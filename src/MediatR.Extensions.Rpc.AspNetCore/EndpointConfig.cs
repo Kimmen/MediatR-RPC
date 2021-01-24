@@ -9,9 +9,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MediatR.Rpc.AspNetCore
 {
+    /// <summary>
+    /// Endpoint configuration for routing the RPC api.
+    /// </summary>
     public static class EndpointConfig
     {
-        public static void MapRpc(this IEndpointRouteBuilder builder, [NotNull] Action<RpcEndpointOptions> configuration)
+        /// <summary>
+        /// Adds the RPC endpoint to the <see cref="IEndpointRouteBuilder"/>.
+        /// </summary>
+        /// <param name="builder">The builder to add the endpoint to.</param>
+        /// <param name="configuration">Configurator for the options needed for the endpoint.</param>
+        /// <returns>The updated builder.</returns>
+        public static IEndpointRouteBuilder MapRpc(this IEndpointRouteBuilder builder, [NotNull] Action<RpcEndpointOptions> configuration)
         {
             Validate(builder, configuration);
 
@@ -26,6 +35,8 @@ namespace MediatR.Rpc.AspNetCore
 
             builder
                 .Map(pattern, pipeline);
+
+            return builder;
         }
 
         private static RpcEndpointOptions BuildOptions(Action<RpcEndpointOptions> configuration)
