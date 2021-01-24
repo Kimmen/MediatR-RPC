@@ -1,8 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
 
-namespace test.Types
+namespace MediatR.Extensions.Rpc.Tests.Types
 {
     public class FlattenRequest : IRequest<FlattenResponse>
     {

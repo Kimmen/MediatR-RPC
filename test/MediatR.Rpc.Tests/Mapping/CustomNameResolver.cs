@@ -1,10 +1,14 @@
 using System;
+
 using FakeItEasy;
+
 using Mediatr.Rpc;
-using test.Types;
+
+using MediatR.Extensions.Rpc.Tests.Types;
+
 using Xunit;
 
-namespace test.Mapping
+namespace MediatR.Extensions.Rpc.Tests.Mapping
 {
     public class CustomNameResolver
     {
