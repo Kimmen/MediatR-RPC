@@ -2,7 +2,7 @@
 Automatically expose your MediatR requests as Remote Procedure Call (RPC) like endpoints.
 
 ## Introduction
-[MediatR](https://github.com/jbogard/MediatR "MediatR at Github") is a simple, unambitious mediator implementation in .NET made by [Jimmy Bogard](https://twitter.com/jbogard?s=20 "Jimmy Bogard at Twitter"). **MediatR-RPC** extension library aims to automatically expose endpoint to process the [Requests](https://github.com/jbogard/MediatR/wiki#requestresponse) using configuration. In ASP.NET Core a single templated route is exposed where clients can POST requests.
+[MediatR](https://github.com/jbogard/MediatR "MediatR at Github") is a simple, unambitious mediator implementation in .NET made by [Jimmy Bogard](https://twitter.com/jbogard?s=20 "Jimmy Bogard at Twitter"). **MediatR-RPC** is an extension library aims to automatically expose endpoints to process the [Requests](https://github.com/jbogard/MediatR/wiki#requestresponse) using configuration. 
 
 When configurating **MediatR-RPC** all configurations needs to be _explicitly_ set. This way it is more clear for the reader what is going and what the expected behaviors are. Altought there are no implicit defaults there are some _predefined configurations helpers_ available ready to use.
 
