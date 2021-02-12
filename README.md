@@ -60,7 +60,7 @@ MediatR-RPC in its core is about matching a name with a corresponding request ty
 
 There are two parts of configurating MediatR-RCP. First configure which requests that are available and how they are mapped. This is done in `.AddMediatrRpc(...)` extenstion method and applying the `RpcOptions`. Second, depending on the host application, the endpoints are configured. 
 
-## RpcOptions
+### RpcOptions
 Property                          | Description
 ------                            | ------
 Requests                          | A collection of MediatR requests that are available for matching.
@@ -71,7 +71,7 @@ Helping methods                   | Description
 ScanRequests()                    | Scans MediatR requests in the specified assmeblies.
 UseRequestNameMatchingConvention()| The request class name is used when matching types.
 
-## RpcEndpointOptions in ASP.NET Core
+### RpcEndpointOptions in ASP.NET Core
 Property                          | Description
 ------                            | ------
 Path                              | The URL root path for the endpoint.
