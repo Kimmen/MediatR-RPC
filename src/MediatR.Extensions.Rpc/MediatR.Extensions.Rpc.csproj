@@ -7,6 +7,24 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>MediatR.Extensions.RPC</PackageId>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Authors>Joakim Rosendahl</Authors>
+    <Copyright>Copyright Joakim Rosendahl</Copyright>
+    <Description>MediatR extension for processing requests by name.</Description>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageTags>mediatr, rpc, asp net core, aspnetcore, aspnet-core, extension, http</PackageTags>
+    <RepositoryUrl></RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+
   <ItemGroup>
     <PackageReference Include="Mediatr" Version="9.0.0" />
   </ItemGroup>
