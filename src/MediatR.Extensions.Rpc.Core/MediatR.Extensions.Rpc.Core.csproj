@@ -1,41 +1,34 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>MediatR.Rpc.AspNetCore</RootNamespace>
+    <TargetFrameworks>net461;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <RootNamespace>MediatR.Rpc</RootNamespace>
     <LangVersion>8.0</LangVersion>
-    <Nullable>enable</Nullable> 
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>MediatR.Extensions.RPC.AspNetCore</PackageId>
+    <PackageId>MediatR.Extensions.RPC.Core</PackageId>
     <Version>1.0.0</Version>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <Authors>Joakim Rosendahl</Authors>
     <Copyright>Copyright Joakim Rosendahl</Copyright>
-    <Description>MediatR extension for automatically expose your MediatR requests as Remote Procedure Call (RPC) like endpoints.</Description>
+    <Description>MediatR extension for processing requests by name.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Kimmen/MediatR-RPC</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <PackageTags>mediatr;rpc;extension;aspnetcore;aspnet-core;http</PackageTags>
+    <PackageTags>mediatr;rpc;extension</PackageTags>
     <RepositoryUrl></RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\nuget</PackageOutputPath>
   </PropertyGroup>
 
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MediatR.Extensions.Rpc.Core\MediatR.Extensions.Rpc.Core.csproj" />
+    <PackageReference Include="Mediatr" Version="9.0.0" />
   </ItemGroup>
 
 </Project>

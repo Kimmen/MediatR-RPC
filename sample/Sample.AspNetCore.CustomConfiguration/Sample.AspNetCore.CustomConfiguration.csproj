@@ -7,12 +7,12 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.RPC.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\MediatR.Extensions.Rpc.AspNetCore\MediatR.Extensions.Rpc.AspNetCore.csproj" />
-  </ItemGroup>
-
+  <PropertyGroup>
+    <RestoreSources>$(RestoreSources);../../nuget;https://api.nuget.org/v3/index.json</RestoreSources>
+  </PropertyGroup>
 
 </Project>
