@@ -11,9 +11,9 @@ In ASP.NET Core MediatR-RPC will configure itself as an EndpointMiddleware with 
 `https://localhost:44393/rpc/{requestName}`
 
 Install package from Nuget: 
-`TBD`
-
-[//]: # (`Install-Package MediatR`)
+```
+Install-Package MediatR.Extensions.RPC.AspNetCore
+```
 
 First register MediatR-RPC when configurating the service by using the `.AddMediatrRpc(...)` extension method on the service collection:
 ```csharp
