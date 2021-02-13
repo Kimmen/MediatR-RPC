@@ -15,8 +15,8 @@
     <Authors>Joakim Rosendahl</Authors>
     <Copyright>Copyright Joakim Rosendahl</Copyright>
     <Description>MediatR extension for processing requests by name.</Description>
-    <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Kimmen/MediatR-RPC/blob/main/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Kimmen/MediatR-RPC</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageTags>mediatr;rpc;extension</PackageTags>

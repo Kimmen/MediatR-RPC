@@ -15,8 +15,8 @@
     <Authors>Joakim Rosendahl</Authors>
     <Copyright>Copyright Joakim Rosendahl</Copyright>
     <Description>MediatR extension for automatically expose your MediatR requests as Remote Procedure Call (RPC) like endpoints.</Description>
-    <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Kimmen/MediatR-RPC/blob/main/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Kimmen/MediatR-RPC</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageTags>mediatr;rpc;extension;aspnetcore;aspnet-core;http</PackageTags>
