@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -19,9 +19,11 @@
     <PackageProjectUrl></PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <PackageTags>mediatr, rpc, asp net core, aspnetcore, aspnet-core, extension, http</PackageTags>
+    <PackageTags>mediatr;rpc;extension;aspnetcore;aspnet-core;http</PackageTags>
     <RepositoryUrl></RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>..\..\nuget</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MediatR.Extensions.Rpc\MediatR.Extensions.Rpc.csproj" />
+    <ProjectReference Include="..\MediatR.Extensions.Rpc.Core\MediatR.Extensions.Rpc.Core.csproj" />
   </ItemGroup>
 
 </Project>

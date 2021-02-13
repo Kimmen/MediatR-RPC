@@ -14,7 +14,7 @@ namespace MediatR.Extensions.Rpc.Tests.Scanning
         [InlineData(typeof(Nested.Request))]
         public void GivenKnownTestRequest_WhenScanning_ThenTargetTypeIsFound(Type knownRequestType)
         {
-            var foundRequestTypes = RequestTypeScanner.FindRequestTypes(knownRequestType.Assembly);
+            var foundRequestTypes = RequestTypeScanner.FindRequestTypes(new[] { knownRequestType });
 
             Assert.Contains(knownRequestType, foundRequestTypes);
         }
