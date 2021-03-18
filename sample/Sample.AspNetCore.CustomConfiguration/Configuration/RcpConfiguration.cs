@@ -1,5 +1,4 @@
-﻿using Mediatr.Rpc;
-
+﻿using MediatR.Rpc;
 using MediatR.Rpc.AspNetCore;
 
 using Microsoft.AspNetCore.Http;
@@ -11,7 +10,6 @@ using Sample.AspNetCore.CustomConfiguration.Handlers;
 using System;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sample.AspNetCore.CustomConfiguration.Configuration
 {

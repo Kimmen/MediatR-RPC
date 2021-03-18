@@ -1,4 +1,5 @@
 using MediatR;
+using MediatR.Rpc;
 using MediatR.Rpc.AspNetCore;
 using MediatR.Rpc.AspNetCore.DependencyInjection;
 

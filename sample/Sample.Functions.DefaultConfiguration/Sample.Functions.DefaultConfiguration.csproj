@@ -3,15 +3,19 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AzureFunctionsVersion>v3</AzureFunctionsVersion>
   </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.RPC.Azure.Functions" Version="2.0.2" />
     <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\MediatR.Extensions.Rpc.Functions\MediatR.Extensions.Rpc.Functions.csproj" />
-  </ItemGroup>
+
+  <PropertyGroup>
+    <RestoreSources>$(RestoreSources);../../nuget;https://api.nuget.org/v3/index.json</RestoreSources>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Update="host.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

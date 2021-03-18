@@ -10,9 +10,9 @@
 
   <PropertyGroup>
     <PackageId>MediatR.Extensions.RPC.Azure.Functions</PackageId>
-    <Version>2.0.0.0</Version>
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
+    <Version>2.0.2</Version>
+    <AssemblyVersion>2.0.2</AssemblyVersion>
+    <FileVersion>2.0.2</FileVersion>
     <Authors>Joakim Rosendahl</Authors>
     <Copyright>Copyright Joakim Rosendahl</Copyright>
     <Description>MediatR extension for integrating with Azure functions. Supports HTTP functions.</Description>
@@ -23,8 +23,8 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/Kimmen/MediatR-RPC.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\nuget</PackageOutputPath>
-    <WarnOnPackingNonPackableProject>true</WarnOnPackingNonPackableProject>
   </PropertyGroup>
 
   <ItemGroup>

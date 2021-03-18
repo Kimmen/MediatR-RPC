@@ -1,7 +1,7 @@
 using System;
-using Mediatr.Rpc;
 
 using MediatR.Extensions.Rpc.Tests.Types;
+using MediatR.Rpc;
 
 using Xunit;
 

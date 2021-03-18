@@ -17,9 +17,10 @@ namespace Sample.Functions.DefaultConfiguration
         public void Configure(IWebJobsBuilder builder)
         {
             var targetAssembly = this.GetType().Assembly;
+
             builder.Services
                 .AddMediatR(targetAssembly)
-                .AddMediatrRpc(o => 
+                .AddMediatrRpc(o =>
                 {
                     o.ScanRequests(targetAssembly);
                     o.UseExactRequestTypeNameMatchingConvention();
