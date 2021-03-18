@@ -1,5 +1,5 @@
 ﻿
-using Mediatr.Rpc;
+using MediatR.Rpc;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +9,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace MediatR.Extensions.Rpc.Functions
+namespace MediatR.Rpc.Azure.Functions
 {
     public static class RpcHttpFunctionOptionsConfigurator
     {

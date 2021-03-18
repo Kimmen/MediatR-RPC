@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Mediatr.Rpc
+namespace MediatR.Rpc
 {
     /// <summary>
     /// Finds request types given a name. Will do a linear search through all requests.

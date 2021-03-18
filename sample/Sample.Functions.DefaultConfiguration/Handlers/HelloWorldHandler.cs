@@ -9,13 +9,13 @@ namespace Sample.Functions.DefaultConfiguration.Handlers
         public string Message { get; set; }
     }
 
-    public class HelloWorldRequest : IRequest<HelloWorldResponse>
+    public class HelloWorld : IRequest<HelloWorldResponse>
     {
         public string Name { get; set; }
     }
-    public class HelloWorldHandler : IRequestHandler<HelloWorldRequest, HelloWorldResponse>
+    public class HelloWorldHandler : IRequestHandler<HelloWorld, HelloWorldResponse>
     {
-        public Task<HelloWorldResponse> Handle(HelloWorldRequest request, CancellationToken cancellationToken)
+        public Task<HelloWorldResponse> Handle(HelloWorld request, CancellationToken cancellationToken)
         {
             return Task.FromResult(new HelloWorldResponse
             {

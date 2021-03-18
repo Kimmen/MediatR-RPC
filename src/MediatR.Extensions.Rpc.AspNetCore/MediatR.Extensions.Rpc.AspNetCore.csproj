@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>MediatR.Rpc.AspNetCore</RootNamespace>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable> 
   </PropertyGroup>
 
@@ -24,6 +24,7 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\nuget</PackageOutputPath>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

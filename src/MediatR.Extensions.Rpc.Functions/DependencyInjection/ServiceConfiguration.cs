@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-using Microsoft.Extensions.DependencyInjection;
+using System;
 
-namespace MediatR.Rpc.AspNetCore.DependencyInjection
+namespace MediatR.Rpc.Azure.Functions.DependencyInjection
 {
     public static class ServiceConfiguration
     {
@@ -25,7 +25,19 @@ namespace MediatR.Rpc.AspNetCore.DependencyInjection
             return services;
         }
 
-        private static void Validate(IServiceCollection services, Action<RpcOptions> configuration)
+        public static IServiceCollection AddMediatrRpcHttp(this IServiceCollection services, Action<RpcHttpFunctionOptions> configuration)
+        {
+            Validate(services, configuration);
+            var options = new RpcHttpFunctionOptions();
+            configuration.Invoke(options);
+
+            services.AddSingleton(options);
+            services.AddTransient<IRpcHttpFunction, RpcHttpFunction>();
+
+            return services;
+        }
+
+        private static void Validate<T>(IServiceCollection services, Action<T> configuration)
         {
             AssertHelper.ValidateIsNotNull(services, nameof(services));
             AssertHelper.ValidateIsNotNull(configuration, nameof(configuration));

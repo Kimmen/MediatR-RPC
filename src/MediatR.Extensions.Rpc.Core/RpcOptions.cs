@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mediatr.Rpc
+namespace MediatR.Rpc
 {
     /// <summary>
     /// Options for the RCP behavior.

@@ -1,6 +1,4 @@
-﻿using Mediatr.Rpc;
-
-namespace MediatR.Rpc.AspNetCore
+﻿namespace MediatR.Rpc.AspNetCore
 {
     /// <summary>
     /// Holds helpers validation methods for <see cref="RpcMiddleware"/>.

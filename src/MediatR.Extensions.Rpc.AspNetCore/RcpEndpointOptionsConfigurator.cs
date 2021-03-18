@@ -4,8 +4,6 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Mediatr.Rpc;
-
 using Microsoft.AspNetCore.Http;
 
 namespace MediatR.Rpc.AspNetCore

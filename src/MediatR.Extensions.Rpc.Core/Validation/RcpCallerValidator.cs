@@ -3,7 +3,7 @@ using System.Linq;
 
 using MediatR;
 
-namespace Mediatr.Rpc
+namespace MediatR.Rpc.Validation
 {
     /// <summary>
     /// Holds helpers validation methods for <see cref="RpcCaller"/>.

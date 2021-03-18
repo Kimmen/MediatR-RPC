@@ -5,7 +5,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Threading;
-using MediatR.Extensions.Rpc.Functions;
+using MediatR.Rpc.Azure.Functions;
 
 namespace Sample.Functions.DefaultConfiguration
 {

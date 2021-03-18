@@ -1,4 +1,4 @@
-﻿namespace Mediatr.Rpc
+﻿namespace MediatR.Rpc
 {
     /// <summary>
     /// Result of a processed request.

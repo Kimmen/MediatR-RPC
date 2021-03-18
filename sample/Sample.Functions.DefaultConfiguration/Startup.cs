@@ -1,4 +1,7 @@
 ﻿using MediatR;
+using MediatR.Rpc;
+using MediatR.Rpc.Azure.Functions;
+using MediatR.Rpc.Azure.Functions.DependencyInjection;
 
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Azure.WebJobs;
@@ -14,7 +17,18 @@ namespace Sample.Functions.DefaultConfiguration
         public void Configure(IWebJobsBuilder builder)
         {
             var targetAssembly = this.GetType().Assembly;
-            builder.Services.AddMediatR(targetAssembly);
+            builder.Services
+                .AddMediatR(targetAssembly)
+                .AddMediatrRpc(o => 
+                {
+                    o.ScanRequests(targetAssembly);
+                    o.UseExactRequestTypeNameMatchingConvention();
+                })
+                .AddMediatrRpcHttp(o => 
+                {
+                    o.DeserializeWithNewtonsoftJson();
+                    o.RpcResultAsOkOrNotFound();
+                });
         }
     }
 }

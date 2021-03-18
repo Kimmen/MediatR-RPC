@@ -1,12 +1,10 @@
-﻿using Mediatr.Rpc;
-
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatR.Extensions.Rpc.Functions
+namespace MediatR.Rpc.Azure.Functions
 {
     public interface IRpcHttpFunction
     {

@@ -1,10 +1,10 @@
+using MediatR.Rpc.Validation;
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-using MediatR;
-
-namespace Mediatr.Rpc
+namespace MediatR.Rpc
 {
     /// <summary>
     /// Finds corresponding requests and process them. 

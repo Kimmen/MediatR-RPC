@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-using Mediatr.Rpc;
-
-namespace MediatR.Rpc.AspNetCore.DependencyInjection
+namespace MediatR.Rpc
 {
     /// <summary>
     /// Configurations methods for RPC options.

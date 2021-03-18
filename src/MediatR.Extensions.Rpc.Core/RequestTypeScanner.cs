@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using MediatR;
-
-namespace Mediatr.Rpc
+namespace MediatR.Rpc
 {
     /// <summary>
     /// Scans for MediatR types.
