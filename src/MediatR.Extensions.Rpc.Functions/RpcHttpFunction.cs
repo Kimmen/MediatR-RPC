@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace MediatR.Rpc.Azure.Functions
 {
+    /// <summary>
+    /// Abstraction for the RPC functionality for Http triggers.
+    /// </summary>
     public interface IRpcHttpFunction
     {
         Task<IActionResult> ProcessHttpCall(string requestName, HttpRequest request, CancellationToken cancellationToken = default);
     }
 
+    /// <summary>
+    /// Process the request for Http trigger as RPC requests.
+    /// </summary>
     public class RpcHttpFunction : IRpcHttpFunction
     {
         private readonly RpcHttpFunctionOptions options;
@@ -18,6 +24,9 @@ namespace MediatR.Rpc.Azure.Functions
 
         public RpcHttpFunction(RpcHttpFunctionOptions options, RpcCaller rpcCaller)
         {
+            RpcHttpFunctionValidator.ValidateCaller(rpcCaller);
+            RpcHttpFunctionValidator.ValidateOptions(options);
+
             this.options = options;
             this.rpcCaller = rpcCaller;
         }

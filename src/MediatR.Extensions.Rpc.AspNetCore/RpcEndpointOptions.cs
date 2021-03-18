@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace MediatR.Rpc.AspNetCore
 {
+    /// <summary>
+    /// Options for the RPC endpoint.
+    /// </summary>
     public class RpcEndpointOptions
     {
 #nullable disable
