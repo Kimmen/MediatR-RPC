@@ -1,7 +1,11 @@
 using System;
 using System.Net;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
+
+using Mediatr.Rpc;
+
 using Microsoft.AspNetCore.Http;
 
 namespace MediatR.Rpc.AspNetCore
@@ -12,7 +16,7 @@ namespace MediatR.Rpc.AspNetCore
     public static class RcpEndpointOptionsConfigurator
     {
         /// <summary>
-        /// Use <see cref="System.Text.Json.JsonSerializer"/> for deserializing requests and serializing responses.
+        /// Use <see cref="JsonSerializer"/> for deserializing requests and serializing responses.
         /// </summary>
         /// <param name="options">The options.</param>
         /// <param name="jsonOptions">Optional custom serialization settings.</param>
@@ -21,16 +25,16 @@ namespace MediatR.Rpc.AspNetCore
         {
             jsonOptions ??= new JsonSerializerOptions();
 
-            options.DeserializeRequest = async (t, c, cancellationToken) =>
+            options.DeserializeRequest = async (requestType, context, cancellationToken) =>
             {
-                var request = c.Request;
+                var request = context.Request;
                 var hasContent = request.ContentLength > 0;
                 
                 if(hasContent)
                 {
                     try
                     {
-                        return await JsonSerializer.DeserializeAsync(request.Body, t, jsonOptions, cancellationToken);
+                        return await JsonSerializer.DeserializeAsync(request.Body, requestType, jsonOptions, cancellationToken);
                     }
                     catch (JsonException ex)
                     {
@@ -39,48 +43,51 @@ namespace MediatR.Rpc.AspNetCore
                 }
 
                 //If there is no body, let's create is using default constructor. 
-                return Activator.CreateInstance(t);
+                return Activator.CreateInstance(requestType);
             };
 
-            options.SerializeResponse = (v, r, ct) =>
+            options.SerializeResponse = async (response, context, cancellationToken) =>
             {
-                return Task.FromResult(JsonSerializer.Serialize(v, jsonOptions));
+                await context.Response.WriteAsync(JsonSerializer.Serialize(response, jsonOptions), cancellationToken);
             };
 
             return options;
         }
 
         /// <summary>
-        /// Respond any unmatched requests with HttpStatus 404 - NotFound.
+        /// If the request was processed, the response is returned with http status code 200 (OK). 
+        /// Otherwise, http status code 404 - NotFound is returned with empty body.
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The updated options.</returns>
-        public static RpcEndpointOptions UnmatchedRequestsAs404NotFound(this RpcEndpointOptions options)
-        {
-            options.UnmatchedRequest = (requestName, context, cancellationToken) =>
-            {
-                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                return Task.CompletedTask;
-            };
-
-            return options;
-        }
-
-        /// <summary>
-        /// Respond any successful requests with HttpStatus 200 - OK and serialized response object.
-        /// </summary>
-        /// <param name="options">The options.</param>
-        /// <returns>The updated options.</returns>
-        public static RpcEndpointOptions ResponsesAs200Ok(this RpcEndpointOptions options)
+        public static RpcEndpointOptions ResultAsOkOrNotFound(this RpcEndpointOptions options)
         {
             options.HandlResponse = async (value, context, cancellationToken) =>
             {
-                var body = await options.SerializeResponse(value, context, cancellationToken);
-                context.Response.StatusCode = (int)HttpStatusCode.OK;
-                await context.Response.WriteAsync(body, cancellationToken);
+                await (value switch
+                {
+                    SuccessfullyProcessedRequestResult r => HandleSuccessResult(r, context, options, cancellationToken),
+                    NotFoundRequestResult r => HandleNotFoundResult(r, context, cancellationToken),
+                    _ => throw new NotImplementedException()
+                });
             };
 
             return options;
+        }
+
+        private static async Task HandleNotFoundResult(NotFoundRequestResult r, HttpContext context, CancellationToken cancellationToken)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            if(string.IsNullOrWhiteSpace(r.RequestName))
+            {
+                await context.Response.WriteAsync($"{r.RequestName} not found", cancellationToken);
+            }
+        }
+
+        private static async Task HandleSuccessResult(SuccessfullyProcessedRequestResult r, HttpContext context, RpcEndpointOptions options, CancellationToken cancellationToken)
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.OK;
+            await options.SerializeResponse(r.Response, context, cancellationToken);
         }
     }
 }

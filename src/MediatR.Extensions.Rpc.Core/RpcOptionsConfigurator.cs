@@ -7,6 +7,9 @@ using Mediatr.Rpc;
 
 namespace MediatR.Rpc.AspNetCore.DependencyInjection
 {
+    /// <summary>
+    /// Configurations methods for RPC options.
+    /// </summary>
     public static class RpcOptionsConfigurator
     {
         /// <summary>
@@ -38,7 +41,7 @@ namespace MediatR.Rpc.AspNetCore.DependencyInjection
         /// </summary>
         /// <param name="options">Options to set the convention for.</param>
         /// <returns>The updated options.</returns>
-        public static RpcOptions UseRequestNameMatchingConvention(this RpcOptions options)
+        public static RpcOptions UseExactRequestTypeNameMatchingConvention(this RpcOptions options)
         {
             options.MatchingConvention = d => d.Name;
 

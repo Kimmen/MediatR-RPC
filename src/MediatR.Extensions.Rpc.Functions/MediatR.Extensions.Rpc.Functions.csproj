@@ -1,21 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>MediatR.Rpc.AspNetCore</RootNamespace>
+    <RootNamespace>MediatR.Rpc.Azure.Functions</RootNamespace>
     <LangVersion>9.0</LangVersion>
-    <Nullable>enable</Nullable> 
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>MediatR.Extensions.RPC.AspNetCore</PackageId>
-    <Version>2.0.0</Version>
+    <PackageId>MediatR.Extensions.RPC.Azure.Functions</PackageId>
+    <Version>2.0.0.0</Version>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <FileVersion>2.0.0.0</FileVersion>
     <Authors>Joakim Rosendahl</Authors>
     <Copyright>Copyright Joakim Rosendahl</Copyright>
-    <Description>MediatR extension for automatically expose your MediatR requests as Remote Procedure Call (RPC) like endpoints.</Description>
-    <PackageTags>mediatr;rpc;extension;aspnetcore;aspnet-core;http</PackageTags>
+    <Description>MediatR extension for integrating with Azure functions. Supports HTTP functions.</Description>
+    <PackageTags>mediatr;rpc;extension;azure functions;http</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Kimmen/MediatR-RPC</PackageProjectUrl>
@@ -24,18 +24,17 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>..\..\nuget</PackageOutputPath>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="3.0.11" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\MediatR.Extensions.Rpc.Core\MediatR.Extensions.Rpc.Core.csproj" />
+    <ProjectReference Include="..\MediatR.Extensions.Rpc.AspNetCore\MediatR.Extensions.Rpc.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>

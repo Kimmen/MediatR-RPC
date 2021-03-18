@@ -2,6 +2,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Mediatr.Rpc;
+
 using Microsoft.AspNetCore.Http;
 
 namespace MediatR.Rpc.AspNetCore
@@ -20,15 +22,11 @@ namespace MediatR.Rpc.AspNetCore
         /// <summary>
         /// Serializer for the responses.
         /// </summary>
-        public Func<object, HttpContext, CancellationToken, Task<string>> SerializeResponse { get; set; }
-        /// <summary>
-        /// Handler for unmatched requests.
-        /// </summary>
-        public Func<string, HttpContext, CancellationToken, Task> UnmatchedRequest { get; set; }
+        public Func<object, HttpContext, CancellationToken, Task> SerializeResponse { get; set; }
         /// <summary>
         /// Handler for responses.
         /// </summary>
-        public Func<object, HttpContext, CancellationToken, Task> HandlResponse { get; set; }
+        public Func<IRpcResult, HttpContext, CancellationToken, Task> HandlResponse { get; set; }
 
 #nullable restore
     }
