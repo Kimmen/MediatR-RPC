@@ -11,7 +11,14 @@ namespace MediatR.Rpc.Azure.Functions
     /// </summary>
     public interface IRpcHttpFunction
     {
-        Task<IActionResult> ProcessHttpCall(string requestName, HttpRequest request, CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Process the Http request as an Rpc request.
+        /// </summary>
+        /// <param name="requestName">The name of the Rpc request to process.</param>
+        /// <param name="request">The Http request.</param>
+        /// <param name="cancellationToken">CancellationToken for the request scope.</param>
+        /// <returns>The Http action result that corresponds with the Rpc result.</returns>
+        Task<IActionResult> ProcessHttpRequest(string requestName, HttpRequest request, CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -31,7 +38,14 @@ namespace MediatR.Rpc.Azure.Functions
             this.rpcCaller = rpcCaller;
         }
 
-        public async Task<IActionResult> ProcessHttpCall(string requestName, HttpRequest request, CancellationToken cancellationToken = default)
+        /// <summary>
+        /// Process the Http request as an Rpc request.
+        /// </summary>
+        /// <param name="requestName">The name of the Rpc request to process.</param>
+        /// <param name="request">The Http request.</param>
+        /// <param name="cancellationToken">CancellationToken for the request scope.</param>
+        /// <returns>The Http action result that corresponds with the Rpc result.</returns>
+        public async Task<IActionResult> ProcessHttpRequest(string requestName, HttpRequest request, CancellationToken cancellationToken = default)
         {
             var result = await this.rpcCaller.Process(requestName, (t, ct) => options.DeserializeRequest((t, request), ct), cancellationToken);
 
