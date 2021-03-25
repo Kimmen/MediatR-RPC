@@ -25,7 +25,7 @@ namespace MediatR.Rpc.Azure.Functions
             options.DeserializeRequest = async (input, ct) =>
             {
                 var (targetType, httpRequest) = input;
-;
+
                 var hasContent = httpRequest.ContentLength > 0;
 
                 if (hasContent)
@@ -46,7 +46,7 @@ namespace MediatR.Rpc.Azure.Functions
                 }
 
                 //If there is no body, let's create is using default constructor. 
-                return Activator.CreateInstance(targetType) ?? throw new ArgumentException($"Failed to construct instance of '{targetType.FullName}' using default constructor.", targetType.Name);
+                return Activator.CreateInstance(targetType) ?? throw new InvalidOperationException($"Got null when created request '{targetType.Name}' using default constructor. Nullable requests are not supported.");
             };
 
             return options;
@@ -68,7 +68,7 @@ namespace MediatR.Rpc.Azure.Functions
                 {
                     SuccessfullyProcessedRequestResult r => new OkObjectResult(r.Response),
                     NotFoundRequestResult r => new NotFoundObjectResult($"{r.RequestName} not found"),
-                    _ => throw new NotImplementedException()
+                    _ => new OkObjectResult(result)
                 };
 
                 return Task.FromResult(actionResult);

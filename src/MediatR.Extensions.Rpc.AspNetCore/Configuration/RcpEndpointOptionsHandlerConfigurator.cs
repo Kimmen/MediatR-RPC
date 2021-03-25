@@ -51,7 +51,7 @@ namespace MediatR.Rpc.AspNetCore.Configuration
 
         private static async Task HandleDefault(object r, HttpContext context, RpcEndpointOptions options, CancellationToken cancellationToken)
         {
-            context.Response.StatusCode = (int)HttpStatusCode.Accepted;
+            context.Response.StatusCode = (int)HttpStatusCode.OK;
             await options.SerializeResponse(r, context, cancellationToken);
         }
     }
