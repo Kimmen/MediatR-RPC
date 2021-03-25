@@ -20,7 +20,8 @@ namespace MediatR.Rpc.Azure.Functions.DependencyInjection
             configuration.Invoke(options);
 
             services.AddSingleton(options);
-            services.AddSingleton<RpcCaller>();
+            services.AddSingleton<RpcRequestRunner>();
+            services.AddSingleton<IRpcRequestRunner>(provider => provider.GetService<RpcRequestRunner>());
 
             return services;
         }

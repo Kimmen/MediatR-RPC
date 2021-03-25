@@ -1,3 +1,4 @@
+
 using MediatR.Rpc.Validation;
 
 using System;
@@ -9,12 +10,20 @@ namespace MediatR.Rpc
     /// <summary>
     /// Finds corresponding requests and process them. 
     /// </summary>
-    public class RpcCaller
+    public interface IRpcRequestRunner
+    {
+        Task<IRpcResult> Process(string requestName, Func<Type, CancellationToken, Task<object>> requestValueFactory, CancellationToken cancellationToken = default);
+    }
+
+    /// <summary>
+    /// Finds corresponding requests and process them. 
+    /// </summary>
+    public sealed class RpcRequestRunner : IRpcRequestRunner
     {
         private readonly ISender sender;
         private readonly LinearSearchRequestTypeProvider requestTypeProvider;
 
-        public RpcCaller(ISender sender, RpcOptions options)
+        public RpcRequestRunner(ISender sender, RpcOptions options)
         {
             RcpCallerValidator.ValidateSender(sender);
             RcpCallerValidator.ValidateOptions(options);
@@ -27,17 +36,17 @@ namespace MediatR.Rpc
         /// Finds, instantiates and process requests that corresponds to the specified name.
         /// </summary>
         /// <param name="requestName">The name of the requests to process</param>
-        /// <param name="requestDeserializer">Deserializer the requests.</param>
+        /// <param name="requestValueFactory">Creates request objects given a Type.</param>
         /// <param name="cancellationToken">Optional Cancellation token.</param>
         /// <returns>Result indicating how the request was processed, containing the response if successful.</returns>
-        public async Task<IRpcResult> Process(string requestName, Func<Type, CancellationToken, Task<object>> requestDeserializer, CancellationToken cancellationToken = default)
+        public async Task<IRpcResult> Process(string requestName, Func<Type, CancellationToken, Task<object>> requestValueFactory, CancellationToken cancellationToken = default)
         {
             if (false == this.requestTypeProvider.TryGetByName(requestName, out var matchedRequestType))
             {
                 return ResultAs.NotFound(requestName);
             }
 
-            var request = await requestDeserializer(matchedRequestType, cancellationToken);
+            var request = await requestValueFactory(matchedRequestType, cancellationToken);
             var response = await this.sender.Send(request, cancellationToken);
 
             return ResultAs.Ok(response);

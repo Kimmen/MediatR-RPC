@@ -20,9 +20,9 @@ namespace MediatR.Rpc.Azure.Functions
     public class RpcHttpFunction : IRpcHttpFunction
     {
         private readonly RpcHttpFunctionOptions options;
-        private readonly RpcCaller rpcCaller;
+        private readonly IRpcRequestRunner rpcCaller;
 
-        public RpcHttpFunction(RpcHttpFunctionOptions options, RpcCaller rpcCaller)
+        public RpcHttpFunction(RpcHttpFunctionOptions options, IRpcRequestRunner rpcCaller)
         {
             RpcHttpFunctionValidator.ValidateCaller(rpcCaller);
             RpcHttpFunctionValidator.ValidateOptions(options);

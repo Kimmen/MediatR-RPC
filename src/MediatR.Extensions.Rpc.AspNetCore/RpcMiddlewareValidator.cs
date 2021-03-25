@@ -6,11 +6,11 @@
     internal static class RpcMiddlewareValidator
     {
         /// <summary>
-        /// Validates <see cref="RpcCaller"/> object.
+        /// Validates <see cref="IRpcRequestRunner"/> object.
         /// </summary>
-        public static void ValidateCaller(RpcCaller rpcCaller)
+        public static void ValidateCaller(IRpcRequestRunner rpcRunner)
         {
-            AssertHelper.ValidateIsNotNull(rpcCaller, nameof(rpcCaller));
+            AssertHelper.ValidateIsNotNull(rpcRunner, nameof(rpcRunner));
         }
 
         /// <summary>

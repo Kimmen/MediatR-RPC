@@ -2,9 +2,9 @@
 {
     internal static class RpcHttpFunctionValidator
     {
-        public static void ValidateCaller(RpcCaller caller)
+        public static void ValidateCaller(IRpcRequestRunner runner)
         {
-            AssertHelper.ValidateIsNotNull(caller, nameof(caller));
+            AssertHelper.ValidateIsNotNull(runner, nameof(runner));
         }
 
         public static void ValidateOptions(RpcHttpFunctionOptions options)
