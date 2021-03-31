@@ -9,9 +9,9 @@
 
   <PropertyGroup>
     <PackageId>MediatR.Extensions.RPC.AspNetCore</PackageId>
-    <Version>2.0.4</Version>
-    <AssemblyVersion>2.0.4</AssemblyVersion>
-    <FileVersion>2.0.4</FileVersion>
+    <Version>2.0.5</Version>
+    <AssemblyVersion>2.0.5</AssemblyVersion>
+    <FileVersion>2.0.5</FileVersion>
     <Authors>Joakim Rosendahl</Authors>
     <Copyright>Copyright Joakim Rosendahl</Copyright>
     <Description>MediatR extension for automatically expose your MediatR requests as Remote Procedure Call (RPC) like endpoints.</Description>

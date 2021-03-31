@@ -2,7 +2,7 @@
 
 using System;
 
-namespace MediatR.Rpc.Azure.Functions.DependencyInjection
+namespace MediatR.Rpc.Azure.Functions.Configuration
 {
     public static class ServiceConfiguration
     {

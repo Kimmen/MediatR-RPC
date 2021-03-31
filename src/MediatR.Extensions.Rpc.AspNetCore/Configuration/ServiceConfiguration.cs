@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MediatR.Rpc.AspNetCore.DependencyInjection
+namespace MediatR.Rpc.AspNetCore.Configuration
 {
     public static class ServiceConfiguration
     {
