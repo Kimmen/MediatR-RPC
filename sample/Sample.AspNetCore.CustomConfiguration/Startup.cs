@@ -1,7 +1,6 @@
 using MediatR;
 using MediatR.Rpc;
 using MediatR.Rpc.AspNetCore;
-using MediatR.Rpc.AspNetCore.DependencyInjection;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

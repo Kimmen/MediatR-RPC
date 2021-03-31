@@ -10,6 +10,8 @@ using Sample.AspNetCore.CustomConfiguration.Handlers;
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Sample.AspNetCore.CustomConfiguration.Configuration
 {
@@ -34,8 +36,9 @@ namespace Sample.AspNetCore.CustomConfiguration.Configuration
         /// </summary>
         public static RpcEndpointOptions SerializeWithJsonNet(this RpcEndpointOptions options, JsonSerializerSettings settings)
         {
-            options.DeserializeRequest = async (targetType, httpContext, cancellationToken) =>
+            options.DeserializeRequest = async (req, cancellationToken) =>
             {
+                var (targetType, httpContext) = req;
                 var request = httpContext.Request;
 
                 if(request.ContentLength > 0)
@@ -48,11 +51,6 @@ namespace Sample.AspNetCore.CustomConfiguration.Configuration
                 return Activator.CreateInstance(targetType);
             };
 
-            options.SerializeResponse = async (response, httpContext, cancellationToken) =>
-            {
-                await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(response), cancellationToken);
-            };
-
             return options;
         }
 
@@ -61,8 +59,9 @@ namespace Sample.AspNetCore.CustomConfiguration.Configuration
         /// </summary>
         public static RpcEndpointOptions HandleCommonAppResponse(this RpcEndpointOptions options)
         {
-            options.HandlResponse = async (result, httpContext, cancellationToken) =>
+            options.SerializeResponse = async (res, cancellationToken) =>
             {
+                var (result, httpContext) = res;
                 if(result is SuccessfullyProcessedRequestResult succResult)
                 {
                     if (succResult.Response is CommonAppResponse response)
@@ -70,7 +69,7 @@ namespace Sample.AspNetCore.CustomConfiguration.Configuration
                         if (response.ValidationErrors.Any())
                         {
                             httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                            await options.SerializeResponse(response.ValidationErrors, httpContext, cancellationToken);
+                            await httpContext.WriteAsJson(response.ValidationErrors, cancellationToken);
 
                         }
                         if (response.Response == null)
@@ -79,7 +78,7 @@ namespace Sample.AspNetCore.CustomConfiguration.Configuration
                         }
 
                         httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                        await options.SerializeResponse(response.Response, httpContext, cancellationToken);
+                        await httpContext.WriteAsJson(response.Response, cancellationToken);
                     }
                     else
                     {
@@ -94,6 +93,11 @@ namespace Sample.AspNetCore.CustomConfiguration.Configuration
             };
 
             return options;
+        }
+
+        private static Task WriteAsJson(this HttpContext httpContext, object value, CancellationToken cancellationToken)
+        {
+            return httpContext.Response.WriteAsync(JsonConvert.SerializeObject(value), cancellationToken);
         }
     }
 }

@@ -19,16 +19,11 @@ namespace MediatR.Rpc.AspNetCore
         /// <summary>
         /// Deserializes Http data to the target type.
         /// </summary>
-        public Func<Type, HttpContext, CancellationToken, Task<object>> DeserializeRequest { get; set; }
+        public Func<(Type TargetRequestType, HttpContext HttpContext), CancellationToken, Task<object>> DeserializeRequest { get; set; }
         /// <summary>
         /// Serializer response to the Http stream.
         /// </summary>
-        public Func<object, HttpContext, CancellationToken, Task> SerializeResponse { get; set; }
-        /// <summary>
-        /// Handle the Rpc process result and it corresponds to the Http context.
-        /// </summary>
-        public Func<IRpcResult, HttpContext, CancellationToken, Task> HandlResponse { get; set; }
-
+        public Func<(IRpcResult Result, HttpContext HttpContext), CancellationToken, Task> SerializeResponse { get; set; }
 #nullable restore
     }
 }

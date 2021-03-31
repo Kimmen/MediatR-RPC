@@ -3,12 +3,9 @@ using System;
 
 namespace MediatR.Rpc.Azure.Functions
 {
-    /// <summary>
-    /// Helper methods for validating for consistent messages.
-    /// </summary>
     internal static class AssertHelper
     {
-        public static void ValidateIsNotNull(object o, string propName)
+        internal static void ValidateIsNotNull(object o, string propName)
         {
             if (o == null)
             {
@@ -16,7 +13,7 @@ namespace MediatR.Rpc.Azure.Functions
             }
         }
 
-        public static void ValidateIsNotEmpty(string value, string propName)
+        internal static void ValidateIsNotEmpty(string value, string propName)
         {
             if (string.IsNullOrWhiteSpace(value))
             {

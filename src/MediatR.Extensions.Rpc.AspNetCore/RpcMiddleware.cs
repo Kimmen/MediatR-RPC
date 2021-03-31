@@ -41,15 +41,17 @@ namespace MediatR.Rpc.AspNetCore
 
         private async Task HandleRouteKeyNotFound(HttpContext context, System.Threading.CancellationToken cancellationToken)
         {
-            await options.HandlResponse(new RequestNameRouteValueNotFoundResult(), context, cancellationToken);
+            var response = (new RequestNameRouteValueNotFoundResult(), context);
+            await options.SerializeResponse(response, cancellationToken);
         }
 
         private async Task HandleRouteKeyFound(object? routeValue, HttpContext context, System.Threading.CancellationToken cancellationToken)
         {
             var requestName = routeValue?.ToString() ?? string.Empty;
-            var result = await rpcCaller.Process(requestName, (t, ct) => options.DeserializeRequest(t, context, ct), cancellationToken);
+            var result = await rpcCaller.Process(requestName, (t, ct) => options.DeserializeRequest((t, context), ct), cancellationToken);
 
-            await options.HandlResponse(result, context, cancellationToken);
+            var response = (result, context);
+            await options.SerializeResponse(response, cancellationToken);
         }
     }
 }

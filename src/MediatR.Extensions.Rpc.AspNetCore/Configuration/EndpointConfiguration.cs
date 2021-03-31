@@ -10,7 +10,7 @@ namespace MediatR.Rpc.AspNetCore
     /// <summary>
     /// Endpoint configuration for routing the RPC api.
     /// </summary>
-    public static class EndpointConfig
+    public static class EndpointConfiguration
     {
         /// <summary>
         /// Adds the RPC endpoint to the <see cref="IEndpointRouteBuilder"/>.

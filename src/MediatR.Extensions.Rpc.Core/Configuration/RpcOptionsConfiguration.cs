@@ -8,7 +8,7 @@ namespace MediatR.Rpc
     /// <summary>
     /// Configurations methods for RPC options.
     /// </summary>
-    public static class RpcOptionsConfigurator
+    public static class RpcOptionsConfiguration
     {
         /// <summary>
         /// Scans for request types in the given assemblies.
