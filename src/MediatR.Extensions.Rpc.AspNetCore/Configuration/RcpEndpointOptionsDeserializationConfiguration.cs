@@ -3,14 +3,12 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-using Microsoft.AspNetCore.Http;
-
 namespace MediatR.Rpc.AspNetCore.Configuration
 {
     /// <summary>
     /// Standard configurations for the RPC endpoint.
     /// </summary>
-    public static class RcpEndpointOptionsSerializationConfigurator
+    public static class RcpEndpointOptionsDeserializationConfiguration
     {
         /// <summary>
         /// Use <see cref="JsonSerializer"/> for deserializing requests and serializing responses.
@@ -18,22 +16,19 @@ namespace MediatR.Rpc.AspNetCore.Configuration
         /// <param name="options">The options.</param>
         /// <param name="jsonOptions">Optional custom serialization settings.</param>
         /// <returns>The updated options.</returns>
-        public static RpcEndpointOptions SerializeWithSystemJson(this RpcEndpointOptions options, JsonSerializerOptions? jsonOptions = null)
+        public static RpcEndpointOptions UseSystemJsonForDeserializeBody(this RpcEndpointOptions options, JsonSerializerOptions? jsonOptions = null)
         {
             jsonOptions ??= new JsonSerializerOptions();
 
-            options.DeserializeRequest = async (requestType, context, cancellationToken) =>
+            options.DeserializeRequest = async (request, cancellationToken) =>
             {
+                var (requestType, context) = request;
+
                 var hasContent = context.Request.ContentLength > 0;
                 return hasContent
                     ? await DeserializeJsonBody(requestType, context.Request.Body, jsonOptions, cancellationToken)
                     : CreateDefault(requestType);
 
-            };
-
-            options.SerializeResponse = async (response, context, cancellationToken) =>
-            {
-                await context.Response.WriteAsync(JsonSerializer.Serialize(response, jsonOptions), cancellationToken);
             };
 
             return options;

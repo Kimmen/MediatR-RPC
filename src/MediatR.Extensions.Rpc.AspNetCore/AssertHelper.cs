@@ -7,7 +7,7 @@ namespace MediatR.Rpc.AspNetCore
     /// </summary>
     internal static class AssertHelper
     {
-        public static void ValidateIsNotNull(object o, string propName)
+        internal static void ValidateIsNotNull(object o, string propName)
         {
             if(o == null)
             {
@@ -15,7 +15,7 @@ namespace MediatR.Rpc.AspNetCore
             }
         }
 
-        public static void ValidateIsNotEmpty(string value, string propName)
+        internal static void ValidateIsNotEmpty(string value, string propName)
         {
             if(string.IsNullOrWhiteSpace(value))
             {

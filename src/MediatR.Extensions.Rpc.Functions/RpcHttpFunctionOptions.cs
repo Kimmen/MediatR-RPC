@@ -1,7 +1,4 @@
 ﻿
-
-using MediatR.Rpc;
-
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +21,7 @@ namespace MediatR.Rpc.Azure.Functions
         /// <summary>
         /// Handler for responses.
         /// </summary>
-        public Func<(IRpcResult Result, HttpRequest HttpRequest), CancellationToken, Task<IActionResult>> HandleResponse { get; set; }
+        public Func<(IRpcResult Result, HttpRequest HttpRequest), CancellationToken, Task<IActionResult>> SerializeResponse { get; set; }
     }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 }

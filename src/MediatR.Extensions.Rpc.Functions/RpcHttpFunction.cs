@@ -27,15 +27,15 @@ namespace MediatR.Rpc.Azure.Functions
     public class RpcHttpFunction : IRpcHttpFunction
     {
         private readonly RpcHttpFunctionOptions options;
-        private readonly IRpcRequestRunner rpcCaller;
+        private readonly IRpcRequestRunner requestRunner;
 
-        public RpcHttpFunction(RpcHttpFunctionOptions options, IRpcRequestRunner rpcCaller)
+        public RpcHttpFunction(RpcHttpFunctionOptions options, IRpcRequestRunner requestRunner)
         {
-            RpcHttpFunctionValidator.ValidateCaller(rpcCaller);
+            RpcHttpFunctionValidator.ValidateRunner(requestRunner);
             RpcHttpFunctionValidator.ValidateOptions(options);
 
             this.options = options;
-            this.rpcCaller = rpcCaller;
+            this.requestRunner = requestRunner;
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace MediatR.Rpc.Azure.Functions
         /// <returns>The Http action result that corresponds with the Rpc result.</returns>
         public async Task<IActionResult> ProcessHttpRequest(string requestName, HttpRequest request, CancellationToken cancellationToken = default)
         {
-            var result = await this.rpcCaller.Process(requestName, (t, ct) => options.DeserializeRequest((t, request), ct), cancellationToken);
+            var result = await this.requestRunner.Process(requestName, (t, ct) => options.DeserializeRequest((t, request), ct), cancellationToken);
 
-            return await this.options.HandleResponse((result, request), cancellationToken);
+            return await this.options.SerializeResponse((result, request), cancellationToken);
         }
     }
 }

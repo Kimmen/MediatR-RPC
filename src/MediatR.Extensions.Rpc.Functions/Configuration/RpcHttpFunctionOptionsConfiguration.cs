@@ -7,12 +7,12 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace MediatR.Rpc.Azure.Functions
+namespace MediatR.Rpc.Azure.Functions.Configuration
 {
     /// <summary>
     /// Configurations methods for RPC options for Http triggers.
     /// </summary>
-    public static class RpcHttpFunctionOptionsConfigurator
+    public static class RpcHttpFunctionOptionsConfiguration
     {
         /// <summary>
         /// Use Newtonsofts <see cref="JsonConvert"/> for deserializing requests.
@@ -20,7 +20,7 @@ namespace MediatR.Rpc.Azure.Functions
         /// <param name="options">The options.</param>
         /// <param name="jsonSettings">Optional custom serialization settings.</param>
         /// <returns>The updated options.</returns>
-        public static RpcHttpFunctionOptions DeserializeWithNewtonsoftJson(this RpcHttpFunctionOptions options, JsonSerializerSettings? jsonSettings = null)
+        public static RpcHttpFunctionOptions UseNewtonsoftJsonForDeserializeBody(this RpcHttpFunctionOptions options, JsonSerializerSettings? jsonSettings = null)
         {
             options.DeserializeRequest = async (input, ct) =>
             {
@@ -58,9 +58,9 @@ namespace MediatR.Rpc.Azure.Functions
         /// </summary>
         /// <param name="options">The options.</param>
         /// <returns>The updated options.</returns>
-        public static RpcHttpFunctionOptions RpcResultAsOkOrNotFound(this RpcHttpFunctionOptions options)
+        public static RpcHttpFunctionOptions UseOkorNotFoundActionResults(this RpcHttpFunctionOptions options)
         {
-            options.HandleResponse = (input, ct) =>
+            options.SerializeResponse = (input, ct) =>
             {
                 var (result, httpRequest) = input;
 

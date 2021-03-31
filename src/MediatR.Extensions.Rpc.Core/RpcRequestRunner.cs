@@ -25,8 +25,8 @@ namespace MediatR.Rpc
 
         public RpcRequestRunner(ISender sender, RpcOptions options)
         {
-            RcpCallerValidator.ValidateSender(sender);
-            RcpCallerValidator.ValidateOptions(options);
+            RpcRequestRunnerValidator.ValidateSender(sender);
+            RpcRequestRunnerValidator.ValidateOptions(options);
 
             this.sender = sender;
             this.requestTypeProvider = new LinearSearchRequestTypeProvider(options.Requests, options.MatchingConvention);

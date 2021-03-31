@@ -7,7 +7,7 @@ namespace MediatR.Rpc.Validation
     /// </summary>
     internal static class AssertHelper
     {
-        public static void ValidateIsNotNull(object value, string propName)
+        internal static void ValidateIsNotNull(object value, string propName)
         {
             if(value == null)
             {

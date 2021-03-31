@@ -12,7 +12,7 @@ namespace MediatR.Rpc
         private readonly IEnumerable<Type> requestTypes;
         private readonly Func<Type, string> resolveRequestName;
 
-        public LinearSearchRequestTypeProvider(IEnumerable<Type> requestTypes, Func<Type, string> resolveRequestName)
+        internal LinearSearchRequestTypeProvider(IEnumerable<Type> requestTypes, Func<Type, string> resolveRequestName)
         {
             this.requestTypes = requestTypes;
             this.resolveRequestName = resolveRequestName;
@@ -24,7 +24,7 @@ namespace MediatR.Rpc
         /// <param name="name">Name to match a request type with.</param>
         /// <param name="requestType">The corresponding request type, if found.</param>
         /// <returns>True if a request was found for the corresponding name; otherwise false.</returns>
-        public bool TryGetByName(string name, out Type requestType)
+        internal bool TryGetByName(string name, out Type requestType)
         {
             requestType = this.requestTypes
                 .FirstOrDefault(d =>

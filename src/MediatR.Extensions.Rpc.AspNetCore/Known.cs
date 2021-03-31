@@ -2,7 +2,7 @@
 {
     internal static class Known
     {
-        public static class RouteValues
+        internal static class RouteValues
         {
             public const string RequestName = nameof(RequestName);
 
