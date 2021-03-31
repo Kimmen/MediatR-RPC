@@ -7,7 +7,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace MediatR.Rpc.Azure.Functions.Configuration
+namespace MediatR.Rpc.Azure.Functions
 {
     /// <summary>
     /// Configurations methods for RPC options for Http triggers.

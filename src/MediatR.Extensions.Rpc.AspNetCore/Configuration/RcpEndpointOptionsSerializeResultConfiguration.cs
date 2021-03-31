@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Http;
 
-namespace MediatR.Rpc.AspNetCore.Configuration
+namespace MediatR.Rpc.AspNetCore
 {
     public static class RcpEndpointOptionsSerializeResultConfiguration
     {

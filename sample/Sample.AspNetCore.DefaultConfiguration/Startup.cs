@@ -1,8 +1,6 @@
 using MediatR;
 using MediatR.Rpc;
 using MediatR.Rpc.AspNetCore;
-using MediatR.Rpc.AspNetCore.Configuration;
-using MediatR.Rpc.AspNetCore.DependencyInjection;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,12 +52,14 @@ namespace WebApplication1
                 endpoints.MapControllers();
                 endpoints.MapRpc(o =>
                 {
-                    o.Path = "rpc";
-                    o.SerializeWithSystemJson(new System.Text.Json.JsonSerializerOptions
+                    var jsonSerializationOptions = new System.Text.Json.JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
-                    });
-                    o.ResultAsOkOrNotFound();
+                    };
+
+                    o.Path = "rpc";
+                    o.UseSystemJsonForDeserializeBody(jsonSerializationOptions);
+                    o.UseSystemJsonForOkOrNotFoundResult(jsonSerializationOptions);
                 });
             });
         }

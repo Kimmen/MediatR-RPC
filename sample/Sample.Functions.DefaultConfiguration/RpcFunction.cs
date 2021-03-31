@@ -1,11 +1,13 @@
-using System.Threading.Tasks;
+using MediatR.Rpc.Azure.Functions;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+
 using System.Threading;
-using MediatR.Rpc.Azure.Functions;
+using System.Threading.Tasks;
 
 namespace Sample.Functions.DefaultConfiguration
 {
@@ -27,7 +29,7 @@ namespace Sample.Functions.DefaultConfiguration
             CancellationToken cancellationToken)
         {
             this.logger.LogDebug("Processing request: {RequestName}", requestName);
-            return await this.rpcFunction.ProcessHttpCall(requestName, req, cancellationToken);
+            return await this.rpcFunction.ProcessHttpRequest(requestName, req, cancellationToken);
         }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MediatR.Rpc.AspNetCore.Configuration
+namespace MediatR.Rpc.AspNetCore
 {
     /// <summary>
     /// Endpoint configuration for routing the RPC api.

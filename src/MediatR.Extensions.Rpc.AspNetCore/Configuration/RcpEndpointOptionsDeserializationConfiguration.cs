@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatR.Rpc.AspNetCore.Configuration
+namespace MediatR.Rpc.AspNetCore
 {
     /// <summary>
     /// Standard configurations for the RPC endpoint.

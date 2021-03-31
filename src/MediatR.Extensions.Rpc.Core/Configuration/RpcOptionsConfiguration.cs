@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace MediatR.Rpc.Configuration
+namespace MediatR.Rpc
 {
     /// <summary>
     /// Configurations methods for RPC options.

@@ -2,7 +2,7 @@
 
 using System;
 
-namespace MediatR.Rpc.Azure.Functions.Configuration
+namespace MediatR.Rpc.Azure.Functions
 {
     public static class ServiceConfiguration
     {

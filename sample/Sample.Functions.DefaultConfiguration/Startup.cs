@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using MediatR.Rpc;
 using MediatR.Rpc.Azure.Functions;
-using MediatR.Rpc.Azure.Functions.DependencyInjection;
 
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Azure.WebJobs;
@@ -27,8 +26,8 @@ namespace Sample.Functions.DefaultConfiguration
                 })
                 .AddMediatrRpcHttp(o => 
                 {
-                    o.DeserializeWithNewtonsoftJson();
-                    o.RpcResultAsOkOrNotFound();
+                    o.UseNewtonsoftJsonForDeserializeBody();
+                    o.UseOkorNotFoundActionResults();
                 });
         }
     }
