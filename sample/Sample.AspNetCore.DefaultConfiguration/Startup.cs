@@ -1,5 +1,7 @@
 using MediatR;
+using MediatR.Rpc;
 using MediatR.Rpc.AspNetCore;
+using MediatR.Rpc.AspNetCore.Configuration;
 using MediatR.Rpc.AspNetCore.DependencyInjection;
 
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +29,7 @@ namespace WebApplication1
             services.AddMediatrRpc(o =>
             {
                 o.ScanRequests(targetAssembly);
-                o.UseRequestNameMatchingConvention();
+                o.UseExactRequestTypeNameMatchingConvention();
             });
 
             services.AddControllers();
@@ -57,8 +59,7 @@ namespace WebApplication1
                     {
                         PropertyNameCaseInsensitive = true
                     });
-                    o.ResponsesAs200Ok();
-                    o.UnmatchedRequestsAs404NotFound();
+                    o.ResultAsOkOrNotFound();
                 });
             });
         }

@@ -1,8 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-using Mediatr.Rpc;
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,7 +24,7 @@ namespace MediatR.Rpc.AspNetCore
 
             var options = BuildOptions(configuration);
             var pattern = options.Path + "/{" + Known.RouteValues.RequestName + ":alpha}";
-            var rpcCaller = builder.ServiceProvider.GetService<RpcCaller>();
+            var rpcCaller = builder.ServiceProvider.GetService<IRpcRequestRunner>();
 
             var pipeline = builder
                 .CreateApplicationBuilder()

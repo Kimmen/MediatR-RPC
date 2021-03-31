@@ -1,7 +1,5 @@
 using System.Threading.Tasks;
 
-using Mediatr.Rpc;
-
 using Microsoft.AspNetCore.Http;
 
 namespace MediatR.Rpc.AspNetCore
@@ -16,9 +14,9 @@ namespace MediatR.Rpc.AspNetCore
 #pragma warning restore IDE0052 
 
         private readonly RpcEndpointOptions options;
-        private readonly RpcCaller rpcCaller;
+        private readonly IRpcRequestRunner rpcCaller;
 
-        public RpcMiddleware(RequestDelegate next, RpcEndpointOptions options, RpcCaller rpcCaller)
+        public RpcMiddleware(RequestDelegate next, RpcEndpointOptions options, IRpcRequestRunner rpcCaller)
         {
             RpcMiddlewareValidator.ValidateOptions(options);
             RpcMiddlewareValidator.ValidateCaller(rpcCaller);
@@ -28,46 +26,30 @@ namespace MediatR.Rpc.AspNetCore
             this.next = next;
         }
 
-        public Task Invoke(HttpContext context)
-        {
-            return context.Request.Method.ToLowerInvariant() switch
-            {
-                "post" => ProcessRequest(context),
-                _ => ResponeWithMethodNotAllowed(context)
-            };
-        }
-
-        private Task ResponeWithMethodNotAllowed(HttpContext context)
-        {
-            var response = context.Response;
-            response.Headers.Add("Allow", $"{HttpMethods.Post}");
-            response.StatusCode = StatusCodes.Status405MethodNotAllowed;
-
-            return Task.CompletedTask;
-        }
-
-        private async Task ProcessRequest(HttpContext context)
+        public async Task Invoke(HttpContext context)
         {
             var cancellationToken = context.RequestAborted;
-            var foundRequestNameRouteKey = context.Request.RouteValues.TryGetValue(Known.RouteValues.RequestName, out var requestNameValue);
-
-            if (false == foundRequestNameRouteKey)
+            if(context.Request.RouteValues.TryGetValue(Known.RouteValues.RequestName, out var requestNameRouteValue))
             {
-                await options.UnmatchedRequest(string.Empty, context, cancellationToken);
-                return;
-            }
-
-            var requestName = requestNameValue.ToString() ?? string.Empty;
-            var result = await rpcCaller.Process(requestName, (t, ct) => options.DeserializeRequest(t, context, ct), cancellationToken);
-
-            if (result.RequestFound)
-            {
-                await options.HandlResponse(result.Response, context, cancellationToken);
+                await HandleRouteKeyFound(requestNameRouteValue, context, cancellationToken);
             }
             else
             {
-                await options.UnmatchedRequest(requestName, context, cancellationToken);
+                await HandleRouteKeyNotFound(context, cancellationToken);
             }
+        }
+
+        private async Task HandleRouteKeyNotFound(HttpContext context, System.Threading.CancellationToken cancellationToken)
+        {
+            await options.HandlResponse(new RequestNameRouteValueNotFoundResult(), context, cancellationToken);
+        }
+
+        private async Task HandleRouteKeyFound(object? routeValue, HttpContext context, System.Threading.CancellationToken cancellationToken)
+        {
+            var requestName = routeValue?.ToString() ?? string.Empty;
+            var result = await rpcCaller.Process(requestName, (t, ct) => options.DeserializeRequest(t, context, ct), cancellationToken);
+
+            await options.HandlResponse(result, context, cancellationToken);
         }
     }
 }

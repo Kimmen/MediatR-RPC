@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mediatr.Rpc
+namespace MediatR.Rpc.Validation
 {
     /// <summary>
     /// Helper methods for validating for consistent messages.

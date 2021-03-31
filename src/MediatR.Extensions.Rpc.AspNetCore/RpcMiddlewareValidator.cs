@@ -1,6 +1,4 @@
-﻿using Mediatr.Rpc;
-
-namespace MediatR.Rpc.AspNetCore
+﻿namespace MediatR.Rpc.AspNetCore
 {
     /// <summary>
     /// Holds helpers validation methods for <see cref="RpcMiddleware"/>.
@@ -8,11 +6,11 @@ namespace MediatR.Rpc.AspNetCore
     internal static class RpcMiddlewareValidator
     {
         /// <summary>
-        /// Validates <see cref="RpcCaller"/> object.
+        /// Validates <see cref="IRpcRequestRunner"/> object.
         /// </summary>
-        public static void ValidateCaller(RpcCaller rpcCaller)
+        public static void ValidateCaller(IRpcRequestRunner rpcRunner)
         {
-            AssertHelper.ValidateIsNotNull(rpcCaller, nameof(rpcCaller));
+            AssertHelper.ValidateIsNotNull(rpcRunner, nameof(rpcRunner));
         }
 
         /// <summary>
@@ -24,7 +22,6 @@ namespace MediatR.Rpc.AspNetCore
             AssertHelper.ValidateIsNotNull(options.SerializeResponse, nameof(options.SerializeResponse));
             AssertHelper.ValidateIsNotNull(options.DeserializeRequest, nameof(options.DeserializeRequest));
             AssertHelper.ValidateIsNotNull(options.HandlResponse, nameof(options.HandlResponse));
-            AssertHelper.ValidateIsNotNull(options.UnmatchedRequest, nameof(options.UnmatchedRequest));
 
             AssertHelper.ValidateIsNotEmpty(options.Path, nameof(options.Path));
         }

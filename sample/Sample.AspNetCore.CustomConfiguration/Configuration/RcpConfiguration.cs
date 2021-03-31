@@ -1,5 +1,4 @@
-﻿using Mediatr.Rpc;
-
+﻿using MediatR.Rpc;
 using MediatR.Rpc.AspNetCore;
 
 using Microsoft.AspNetCore.Http;
@@ -11,7 +10,6 @@ using Sample.AspNetCore.CustomConfiguration.Handlers;
 using System;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sample.AspNetCore.CustomConfiguration.Configuration
 {
@@ -50,9 +48,9 @@ namespace Sample.AspNetCore.CustomConfiguration.Configuration
                 return Activator.CreateInstance(targetType);
             };
 
-            options.SerializeResponse = (response, httpContext, cancellationToken) =>
+            options.SerializeResponse = async (response, httpContext, cancellationToken) =>
             {
-                return Task.FromResult(JsonConvert.SerializeObject(response));
+                await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(response), cancellationToken);
             };
 
             return options;
@@ -63,35 +61,36 @@ namespace Sample.AspNetCore.CustomConfiguration.Configuration
         /// </summary>
         public static RpcEndpointOptions HandleCommonAppResponse(this RpcEndpointOptions options)
         {
-            options.HandlResponse = async (response, httpContext, cancellationToken) =>
+            options.HandlResponse = async (result, httpContext, cancellationToken) =>
             {
-                if(response is CommonAppResponse resp)
+                if(result is SuccessfullyProcessedRequestResult succResult)
                 {
-                    if(resp.ValidationErrors.Any())
+                    if (succResult.Response is CommonAppResponse response)
                     {
-                        httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                        var errors = await options.SerializeResponse(resp.ValidationErrors, httpContext, cancellationToken);
-                        await httpContext.Response.WriteAsync(errors, cancellationToken);
-                    }
-                    if(resp.Response == null)
-                    {
-                        httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
-                    }
-                    
-                    httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
-                    var body = await options.SerializeResponse(resp.Response, httpContext, cancellationToken);
-                    await httpContext.Response.WriteAsync(body, cancellationToken);
-                }
-                else
-                {
-                    httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.InternalServerError;
-                }
-            };
+                        if (response.ValidationErrors.Any())
+                        {
+                            httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                            await options.SerializeResponse(response.ValidationErrors, httpContext, cancellationToken);
 
-            options.UnmatchedRequest = (requstName, httpContext, cancellationToken) =>
-            {
-                httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
-                return Task.CompletedTask;
+                        }
+                        if (response.Response == null)
+                        {
+                            httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                        }
+
+                        httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        await options.SerializeResponse(response.Response, httpContext, cancellationToken);
+                    }
+                    else
+                    {
+                        httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.InternalServerError;
+                    }
+                }
+                else  if(result is NotFoundRequestResult notFoundResult)
+                {
+                    httpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                    await httpContext.Response.WriteAsync(notFoundResult.RequestName, cancellationToken);
+                }
             };
 
             return options;

@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace MediatR.Rpc.AspNetCore
 {
+    /// <summary>
+    /// Options for the RPC endpoint.
+    /// </summary>
     public class RpcEndpointOptions
     {
 #nullable disable
@@ -14,21 +17,17 @@ namespace MediatR.Rpc.AspNetCore
         /// </summary>
         public string Path { get; set; }
         /// <summary>
-        /// Deserializer for the requests.
+        /// Deserializes Http data to the target type.
         /// </summary>
         public Func<Type, HttpContext, CancellationToken, Task<object>> DeserializeRequest { get; set; }
         /// <summary>
-        /// Serializer for the responses.
+        /// Serializer response to the Http stream.
         /// </summary>
-        public Func<object, HttpContext, CancellationToken, Task<string>> SerializeResponse { get; set; }
+        public Func<object, HttpContext, CancellationToken, Task> SerializeResponse { get; set; }
         /// <summary>
-        /// Handler for unmatched requests.
+        /// Handle the Rpc process result and it corresponds to the Http context.
         /// </summary>
-        public Func<string, HttpContext, CancellationToken, Task> UnmatchedRequest { get; set; }
-        /// <summary>
-        /// Handler for responses.
-        /// </summary>
-        public Func<object, HttpContext, CancellationToken, Task> HandlResponse { get; set; }
+        public Func<IRpcResult, HttpContext, CancellationToken, Task> HandlResponse { get; set; }
 
 #nullable restore
     }
