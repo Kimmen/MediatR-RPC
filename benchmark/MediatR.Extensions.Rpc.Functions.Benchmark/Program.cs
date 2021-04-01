@@ -1,12 +1,11 @@
 ﻿using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 
-using MediatR.Rpc.AspNetCore.Benchmark.Requests;
+using MediatR.Rpc.Functions.Benchmark.Requests;
 
 using System;
-using System.Threading.Tasks;
 
-namespace MediatR.Rpc.AspNetCore.Benchmark
+namespace MediatR.Rpc.Functions.Benchmark
 {
     class Program
     {
@@ -15,7 +14,7 @@ namespace MediatR.Rpc.AspNetCore.Benchmark
             Console.WriteLine($"Number of available requests: {new RequestFactory().Count() }");
 
             var config = DefaultConfig.Instance.WithOptions(ConfigOptions.DisableOptimizationsValidator);
-            BenchmarkRunner.Run<SlimMiddlewareProcessRequests>(config);
+            BenchmarkRunner.Run<SlimHttpFunctionProcessRequest>(config);
 
             Console.ReadKey();
         }

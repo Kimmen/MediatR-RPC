@@ -29,7 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmark", "benchmark", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Rpc.Core.Benchmark", "benchmark\MediatR.Extensions.Rpc.Core.Benchmark\MediatR.Extensions.Rpc.Core.Benchmark.csproj", "{39C84795-F5B7-4EA7-8243-B59B24677A78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Rpc.AspNetCore.Benchmark", "benchmark\MediatR.Extensions.Rpc.AspNetCore.Benchmark\MediatR.Extensions.Rpc.AspNetCore.Benchmark.csproj", "{14580A84-C5E5-46D1-B775-21D8C0167FAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Rpc.AspNetCore.Benchmark", "benchmark\MediatR.Extensions.Rpc.AspNetCore.Benchmark\MediatR.Extensions.Rpc.AspNetCore.Benchmark.csproj", "{14580A84-C5E5-46D1-B775-21D8C0167FAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Rpc.Functions.Benchmark", "benchmark\MediatR.Extensions.Rpc.Functions.Benchmark\MediatR.Extensions.Rpc.Functions.Benchmark.csproj", "{1F6B3FEB-73EB-4E31-B46A-34425105E968}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +79,10 @@ Global
 		{14580A84-C5E5-46D1-B775-21D8C0167FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14580A84-C5E5-46D1-B775-21D8C0167FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14580A84-C5E5-46D1-B775-21D8C0167FAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F6B3FEB-73EB-4E31-B46A-34425105E968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F6B3FEB-73EB-4E31-B46A-34425105E968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F6B3FEB-73EB-4E31-B46A-34425105E968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F6B3FEB-73EB-4E31-B46A-34425105E968}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +98,7 @@ Global
 		{B2CEAA9B-050A-4B90-8F83-59D14A33D0F2} = {2FC5BF3B-268D-48CA-92E9-7C7E2615D0D0}
 		{39C84795-F5B7-4EA7-8243-B59B24677A78} = {6B5CDA6A-3A3B-4AE8-BE31-FDA6D672E36B}
 		{14580A84-C5E5-46D1-B775-21D8C0167FAB} = {6B5CDA6A-3A3B-4AE8-BE31-FDA6D672E36B}
+		{1F6B3FEB-73EB-4E31-B46A-34425105E968} = {6B5CDA6A-3A3B-4AE8-BE31-FDA6D672E36B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0EDA2E7-02A4-4221-A055-57AE0AE54441}

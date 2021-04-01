@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading;
 
-namespace MediatR.Rpc.AspNetCore.Benchmark
+namespace MediatR.Rpc.AspNetCore.Benchmark.Fakes
 {
-    public class FakeHttpContext : HttpContext
+    public sealed class FakeHttpContext : HttpContext
     {
         private HttpRequest request = new FakeHttpRequest();
 

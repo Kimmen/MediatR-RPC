@@ -6,13 +6,13 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatR.Rpc.AspNetCore.Benchmark
+namespace MediatR.Rpc.AspNetCore.Benchmark.Fakes
 {
-    public class FakeHttpRequest : HttpRequest
+    public sealed class FakeHttpRequest : HttpRequest
     {
         public FakeHttpRequest()
         {
-            this.RouteValues = RouteValueDictionary.FromArray(new System.Collections.Generic.KeyValuePair<string, object?>[0]);
+            this.RouteValues = new RouteValueDictionary();
         }
 
         public override HttpContext HttpContext => throw new NotImplementedException();
