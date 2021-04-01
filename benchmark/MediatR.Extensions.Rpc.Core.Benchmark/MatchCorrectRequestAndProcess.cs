@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Loggers;
 
 using MediatR.Rpc.Benchmark;
 using MediatR.Rpc.Benchmark.Requests;
@@ -10,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace MediatR.Rpc.Core.Benchmark
 {
-#nullable disable
     public class MatchCorrectRequestAndProcess
     {
         private static readonly object request = new Request0();
@@ -38,9 +36,30 @@ namespace MediatR.Rpc.Core.Benchmark
         }
 
         [Benchmark]
-        public async Task<IRpcResult> ProcessRequest()
+        public async Task<IRpcResult> MatchFirst()
         {
-            var target = nameof(Request0);
+            var target = "Request0";
+            return await this.runner.Process(target, this.ValueFactory, default);
+        }
+
+        [Benchmark]
+        public async Task<IRpcResult> MatchMiddle()
+        {
+            var target = $"Request{RegistratedRequestsCount / 2}";
+            return await this.runner.Process(target, this.ValueFactory, default);
+        }
+
+        [Benchmark]
+        public async Task<IRpcResult> MatchLast()
+        {
+            var target = $"Request{RegistratedRequestsCount - 1}";
+            return await this.runner.Process(target, this.ValueFactory, default);
+        }
+
+        [Benchmark]
+        public async Task<IRpcResult> NoMatch()
+        {
+            var target = $"NoExistingRequest";
             return await this.runner.Process(target, this.ValueFactory, default);
         }
 
@@ -49,5 +68,4 @@ namespace MediatR.Rpc.Core.Benchmark
             return Task.FromResult(request);
         }
     }
-#nullable restore
 }

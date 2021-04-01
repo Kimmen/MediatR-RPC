@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatR.Rpc.Benchmark
+namespace MediatR.Rpc.AspNetCore.Benchmark
 {
     public class FakeSender : ISender
     {
