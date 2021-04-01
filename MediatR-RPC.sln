@@ -21,9 +21,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.AspNetCore.CustomCon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Rpc.Core", "src\MediatR.Extensions.Rpc.Core\MediatR.Extensions.Rpc.Core.csproj", "{2473CC8B-D956-4A1B-8964-A92BACE46E26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Functions.DefaultConfiguration", "sample\Sample.Functions.DefaultConfiguration\Sample.Functions.DefaultConfiguration.csproj", "{BB23025D-6862-4787-A9C8-1421EAB9A6EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.Functions.DefaultConfiguration", "sample\Sample.Functions.DefaultConfiguration\Sample.Functions.DefaultConfiguration.csproj", "{BB23025D-6862-4787-A9C8-1421EAB9A6EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Rpc.Functions", "src\MediatR.Extensions.Rpc.Functions\MediatR.Extensions.Rpc.Functions.csproj", "{B2CEAA9B-050A-4B90-8F83-59D14A33D0F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatR.Extensions.Rpc.Functions", "src\MediatR.Extensions.Rpc.Functions\MediatR.Extensions.Rpc.Functions.csproj", "{B2CEAA9B-050A-4B90-8F83-59D14A33D0F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmark", "benchmark", "{6B5CDA6A-3A3B-4AE8-BE31-FDA6D672E36B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediatR.Extensions.Rpc.Core.Benchmark", "benchmark\MediatR.Extensions.Rpc.Core.Benchmark\MediatR.Extensions.Rpc.Core.Benchmark.csproj", "{39C84795-F5B7-4EA7-8243-B59B24677A78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +67,10 @@ Global
 		{B2CEAA9B-050A-4B90-8F83-59D14A33D0F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2CEAA9B-050A-4B90-8F83-59D14A33D0F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2CEAA9B-050A-4B90-8F83-59D14A33D0F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39C84795-F5B7-4EA7-8243-B59B24677A78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C84795-F5B7-4EA7-8243-B59B24677A78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C84795-F5B7-4EA7-8243-B59B24677A78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C84795-F5B7-4EA7-8243-B59B24677A78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +84,7 @@ Global
 		{2473CC8B-D956-4A1B-8964-A92BACE46E26} = {2FC5BF3B-268D-48CA-92E9-7C7E2615D0D0}
 		{BB23025D-6862-4787-A9C8-1421EAB9A6EB} = {7B22D3AA-1E2D-4DC7-8FDD-17ECC2F475C8}
 		{B2CEAA9B-050A-4B90-8F83-59D14A33D0F2} = {2FC5BF3B-268D-48CA-92E9-7C7E2615D0D0}
+		{39C84795-F5B7-4EA7-8243-B59B24677A78} = {6B5CDA6A-3A3B-4AE8-BE31-FDA6D672E36B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0EDA2E7-02A4-4221-A055-57AE0AE54441}
