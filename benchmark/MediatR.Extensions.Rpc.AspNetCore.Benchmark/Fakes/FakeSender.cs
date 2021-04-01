@@ -5,6 +5,13 @@ namespace MediatR.Rpc.AspNetCore.Benchmark.Fakes
 {
     public sealed class FakeSender : ISender
     {
+        private readonly object defaultUntypedResponse;
+
+        public FakeSender(object defaultUntypedResponse)
+        {
+            this.defaultUntypedResponse = defaultUntypedResponse;
+        }
+
         public Task<TResponse> Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
         {
             var response = default(TResponse);
@@ -13,8 +20,7 @@ namespace MediatR.Rpc.AspNetCore.Benchmark.Fakes
 
         public Task<object> Send(object request, CancellationToken cancellationToken = default)
         {
-            object response = null;
-            return Task.FromResult(response);
+            return Task.FromResult(defaultUntypedResponse);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace MediatR.Rpc.AspNetCore.Benchmark.Requests
 {
     public class RequestFactory
     {
-        private Dictionary<Type, object?> requests;
+        private Dictionary<Type, object> requests;
 
         public RequestFactory()
         {

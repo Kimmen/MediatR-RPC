@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Http;
 
 using System.Threading.Tasks;
 
-namespace MediatR.Rpc.AspNetCore.Benchmark
+namespace MediatR.Rpc.AspNetCore.Benchmark.Middleware
 {
     /// <summary>
     /// Only benchmark the actual code in Middleware.,
     /// </summary>
-    public class SlimMiddlewareProcessRequests
+    public class UsingDummyConfigurations
     {
         //same as MediatR.Rpc.AspNetCore.Known.RouteValues.RequestName.
         private const string RequestName = "RequestName";
