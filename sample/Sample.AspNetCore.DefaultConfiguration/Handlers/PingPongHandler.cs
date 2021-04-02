@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 
-namespace WebApplication1.Handlers
+namespace Sample.AspNetCore.DefaultConfiguration.Handlers
 {
     public class Pong
     {

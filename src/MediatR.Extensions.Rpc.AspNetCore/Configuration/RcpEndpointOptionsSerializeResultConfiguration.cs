@@ -9,6 +9,8 @@ namespace MediatR.Rpc.AspNetCore
 {
     public static class RcpEndpointOptionsSerializeResultConfiguration
     {
+        private const string JsonContentType = "application/json; charset=utf-8";
+
         /// <summary>
         /// Given successful result, returns Http status code 200 (OK) and uses <see cref="JsonSerializer"/> for serializing the response body.
         /// Otherwise, http status code 404 - NotFound is returned with an empty body.
@@ -26,6 +28,7 @@ namespace MediatR.Rpc.AspNetCore
                 {
                     SuccessfullyProcessedRequestResult r => context
                         .WithStatus(HttpStatusCode.OK)
+                        .WithContentType(JsonContentType)
                         .Complete(r.Response, jsonOptions, cancellationToken),
 
                     NotFoundRequestResult r => context
@@ -34,6 +37,7 @@ namespace MediatR.Rpc.AspNetCore
 
                     RequestNameRouteValueNotFoundResult r => context
                         .WithStatus(HttpStatusCode.NotFound)
+                        .WithContentType(JsonContentType)
                         .Complete(),
 
                     _ => context
@@ -51,13 +55,23 @@ namespace MediatR.Rpc.AspNetCore
             return context;
         }
 
+        private static HttpContext WithContentType(this HttpContext context, string contentType)
+        {
+            context.Response.ContentType = contentType;
+            return context;
+        }
+
         private static Task Complete(this HttpContext context, object? responseData, JsonSerializerOptions? options, CancellationToken cancellationToken)
         {
-            return responseData == null
-                ? context.Complete()
-                : context.Response.WriteAsync(
-                        JsonSerializer.Serialize(responseData, options),
-                        cancellationToken);
+            if(responseData == null)
+            {
+                return context.Complete();
+            }
+
+            var serializedData = JsonSerializer.Serialize(responseData, options);
+            context.Response.ContentLength = System.Text.Encoding.UTF8.GetByteCount(serializedData);
+            
+            return context.Response.WriteAsync(serializedData,cancellationToken);
         }
 
         private static Task Complete(this HttpContext context)

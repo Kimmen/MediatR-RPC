@@ -14,7 +14,7 @@ namespace MediatR.Rpc
         /// </summary>
         public Func<Type, string> MatchingConvention { get; set; }
         /// <summary>
-        /// The requests that can be matched using RPC.
+        /// The requests that can be matched using RPC. Will be materialized once in use.
         /// </summary>
         public IEnumerable<Type> Requests { get; set; }
 #nullable restore

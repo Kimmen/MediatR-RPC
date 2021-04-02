@@ -9,7 +9,7 @@ namespace MediatR.Rpc.Core.Benchmark
 {
     public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine($"Number of available requests: {new RequestFactory().Count() }");
 

@@ -5,7 +5,7 @@ namespace MediatR.Rpc.Functions.Benchmark.Fakes
 {
     public sealed class FakeSender : ISender
     {
-        private object defaultUntypedResponse;
+        private readonly object defaultUntypedResponse;
 
         public FakeSender(object defaultUntypedResponse = null)
         {

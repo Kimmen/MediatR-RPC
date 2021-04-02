@@ -6,7 +6,7 @@ namespace MediatR.Rpc.Benchmark.Requests
 {
     public class RequestFactory
     {
-        private Dictionary<Type, object?> requests;
+        private readonly Dictionary<Type, object> requests;
 
         public RequestFactory()
         {

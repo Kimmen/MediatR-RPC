@@ -7,15 +7,13 @@ namespace MediatR.Rpc.Benchmark
     {
         public Task<TResponse> Send<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken = default)
         {
-#nullable disable
             var response = default(TResponse);
             return Task.FromResult(response);
-#nullable restore
         }
 
-        public Task<object?> Send(object request, CancellationToken cancellationToken = default)
+        public Task<object> Send(object request, CancellationToken cancellationToken = default)
         {
-            object? response = null;
+            object response = null;
             return Task.FromResult(response);
         }
     }
