@@ -21,7 +21,7 @@ namespace MediatR.Rpc
     public sealed class RpcRequestRunner : IRpcRequestRunner
     {
         private readonly ISender sender;
-        private readonly LinearSearchRequestTypeProvider requestTypeProvider;
+        private readonly DictionarySearchRequestTypeProvider requestTypeProvider;
 
         public RpcRequestRunner(ISender sender, RpcOptions options)
         {
@@ -29,7 +29,7 @@ namespace MediatR.Rpc
             RpcRequestRunnerValidator.ValidateOptions(options);
 
             this.sender = sender;
-            this.requestTypeProvider = new LinearSearchRequestTypeProvider(options.Requests, options.MatchingConvention);
+            this.requestTypeProvider = new DictionarySearchRequestTypeProvider(options.Requests, options.MatchingConvention);
         }
 
         /// <summary>

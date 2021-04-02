@@ -15,7 +15,7 @@
         /// <summary>
         /// The response of request process.
         /// </summary>
-        public object? Response { get; internal set; }
+        public object? Response { get; set; }
     }
 
     /// <summary>

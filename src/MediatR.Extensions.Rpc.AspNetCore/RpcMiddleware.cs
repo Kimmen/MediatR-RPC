@@ -7,7 +7,7 @@ namespace MediatR.Rpc.AspNetCore
     /// <summary>
     /// Middleware for handling the HTTP routing.
     /// </summary>
-    internal class RpcMiddleware
+    public class RpcMiddleware
     {
 #pragma warning disable IDE0052 //Needed for the class to be created as a Middlware. Keep it around for later use.
         private readonly RequestDelegate next;

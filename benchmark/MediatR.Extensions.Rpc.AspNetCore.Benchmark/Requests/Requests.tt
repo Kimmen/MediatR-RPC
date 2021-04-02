@@ -1,0 +1,17 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<# var targetRequestCount = 1000; #>
+
+// Template generated Requests
+namespace MediatR.Rpc.AspNetCore.Benchmark.Requests
+{
+<# // This code runs in the text template:
+  for (var i = 0; i < targetRequestCount; i++)  { #>
+	internal class Response<#= i #> { }
+	internal class Request<#= i #> : IRequest<Response<#= i #>>  { }
+<# } #>
+}
