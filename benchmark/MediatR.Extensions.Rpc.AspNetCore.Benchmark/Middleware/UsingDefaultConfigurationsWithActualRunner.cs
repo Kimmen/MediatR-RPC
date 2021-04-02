@@ -19,7 +19,7 @@ namespace MediatR.Rpc.AspNetCore.Benchmark.Middleware
     {
         //same as MediatR.Rpc.AspNetCore.Known.RouteValues.RequestName.
         private const string RequestName = "RequestName";
-        private RequestFactory requestFactory;
+        private readonly RequestFactory requestFactory;
         private RpcMiddleware middleware;
         private HttpContext httpContext;
         private string requestName;

@@ -17,7 +17,7 @@ namespace MediatR.Rpc.Functions.Benchmark
         private RpcHttpFunction httpCaller;
         private HttpRequest httpRequest;
         private string requestName;
-        private RequestFactory requestFactory;
+        private readonly RequestFactory requestFactory;
 
         [Params(10, 100, 1000)]
         public int RegistratedRequestsCount;
