@@ -6,7 +6,7 @@ using Xunit;
 
 namespace MediatR.Rpc.Core.Tests.RequestTypeScanner
 {
-    public class IsOpenGeneric
+    public class IsOpenGenericTests
     {
         [Fact]
         public void GivenClosedGeneric_WhenEvaluating_ThenIsDeterminedNotToBeOpened()

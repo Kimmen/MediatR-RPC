@@ -6,7 +6,7 @@ using Xunit;
 
 namespace MediatR.Rpc.Core.Tests.RequestTypeScanner
 {
-    public class IsMediatrRequest
+    public class IsMediatrRequestTests
     {
         [Fact]
         public void GivenMediatrRequest_WhenEvaluating_ThenIsDeterminedToBeAMediatrRequest()

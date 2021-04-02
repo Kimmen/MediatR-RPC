@@ -8,7 +8,7 @@ using Xunit;
 
 namespace MediatR.Rpc.Core.Tests.RequestTypeScanner
 {
-    public class FindRequestTypes
+    public class FindRequestTypesTests
     {
         [Theory]
         [InlineData(typeof(FlattenRequest))]

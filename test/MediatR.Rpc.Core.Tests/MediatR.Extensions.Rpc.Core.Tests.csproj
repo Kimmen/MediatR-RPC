@@ -26,8 +26,4 @@
     <ProjectReference Include="..\..\src\MediatR.Extensions.Rpc.Core\MediatR.Extensions.Rpc.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="RpcRequestRunner\" />
-  </ItemGroup>
-
 </Project>
