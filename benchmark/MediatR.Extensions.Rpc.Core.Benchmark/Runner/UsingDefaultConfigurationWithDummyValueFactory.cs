@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 
+using MediatR.Rpc.Core;
 using MediatR.Rpc.Benchmark;
 using MediatR.Rpc.Benchmark.Requests;
 
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MediatR.Rpc.Core.Benchmark
 {
-    public class MatchCorrectRequestAndProcess
+    public class UsingDefaultConfigurationWithDummyValueFactory
     {
         private static readonly object request = new Request0();
         private readonly RequestFactory requestFactory;
@@ -18,7 +19,7 @@ namespace MediatR.Rpc.Core.Benchmark
         [Params(10, 100, 1000)]
         public int RegistratedRequestsCount;
 
-        public MatchCorrectRequestAndProcess()
+        public UsingDefaultConfigurationWithDummyValueFactory()
         {
             this.requestFactory = new RequestFactory();
         }
@@ -26,13 +27,11 @@ namespace MediatR.Rpc.Core.Benchmark
         [GlobalSetup]
         public void Setup()
         {
-            RpcOptions options = new()
-            {
-                MatchingConvention = (t) => t.Name,
-                Requests = this.requestFactory.TakeRequestTypes(RegistratedRequestsCount).ToList()
-            };
-
-            this.runner = new RpcRequestRunner(new FakeSender(), options);
+            this.runner = new RpcRequestRunner(
+                new FakeSender(), 
+                new RpcOptions()
+                    .UseExactRequestTypeNameMatchingConvention()
+                    .ScanRequests(this.requestFactory.TakeRequestTypes(RegistratedRequestsCount).ToList()));
         }
 
         [Benchmark]

@@ -30,9 +30,9 @@ namespace MediatR.Rpc.Functions.Benchmark.Fakes
         public override IHeaderDictionary Headers => throw new NotImplementedException();
 
         public override IRequestCookieCollection Cookies { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override long? ContentLength { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string ContentType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override Stream Body { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override long? ContentLength { get; set; }
+        public override string ContentType { get; set; }
+        public override Stream Body { get; set; }
 
         public override bool HasFormContentType => throw new NotImplementedException();
 

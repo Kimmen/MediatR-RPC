@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 namespace MediatR.Rpc.AspNetCore.Benchmark.Middleware
 {
     /// <summary>
-    /// Only benchmark the actual code in Middleware.,
+    /// Benchmark using proper injections.
     /// </summary>
-    public class UsingDefaultConfigurations
+    public class UsingDefaultConfigurationsWithActualRunner
     {
         //same as MediatR.Rpc.AspNetCore.Known.RouteValues.RequestName.
         private const string RequestName = "RequestName";
@@ -28,7 +28,7 @@ namespace MediatR.Rpc.AspNetCore.Benchmark.Middleware
         public int RegistratedRequestsCount;
         
 
-        public UsingDefaultConfigurations()
+        public UsingDefaultConfigurationsWithActualRunner()
         {
             this.requestFactory = new RequestFactory();
         }
@@ -47,7 +47,7 @@ namespace MediatR.Rpc.AspNetCore.Benchmark.Middleware
                     new FakeSender(new RpcBenchmarkResponse()), 
                     new RpcOptions()
                         .UseExactRequestTypeNameMatchingConvention()
-                        .ScanRequests());
+                        .ScanRequests(requests));
 
             this.middleware = new RpcMiddleware(
                 new RequestDelegate(c => Task.CompletedTask),
@@ -66,14 +66,14 @@ namespace MediatR.Rpc.AspNetCore.Benchmark.Middleware
         }
 
         [Benchmark]
-        public async Task RealisticProcessExistingRequest()
+        public async Task ProcessExistingRequest()
         {
             this.httpContext.Request.RouteValues[RequestName] = this.requestName;
             await this.middleware.Invoke(this.httpContext);
         }
 
         [Benchmark]
-        public async Task RealisticNonExistingRouteValue()
+        public async Task ProcessNonExistingRequest()
         {
             this.httpContext.Request.RouteValues.Remove(RequestName);
             await this.middleware.Invoke(this.httpContext);

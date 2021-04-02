@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace MediatR.Rpc.AspNetCore.Benchmark.Middleware
 {
     /// <summary>
-    /// Only benchmark the actual code in Middleware.,
+    /// Benchmark Middleware using dummy injections.
     /// </summary>
-    public class UsingDummyConfigurations
+    public class UsingDummyConfigurationsWithFakeRunner
     {
         //same as MediatR.Rpc.AspNetCore.Known.RouteValues.RequestName.
         private const string RequestName = "RequestName";
@@ -37,14 +37,14 @@ namespace MediatR.Rpc.AspNetCore.Benchmark.Middleware
         }
 
         [Benchmark]
-        public async Task ProcessHttpRequestWithRouteValue()
+        public async Task ProcessExistingRequest()
         {
             this.httpContext.Request.RouteValues[RequestName] = $"Request0";
             await this.middleware.Invoke(this.httpContext);
         }
 
         [Benchmark]
-        public async Task ProcessHttpRequestWithoutRouteValue()
+        public async Task ProcessWithoutRouteValue()
         {
             this.httpContext.Request.RouteValues.Remove(RequestName);
             await this.middleware.Invoke(this.httpContext);

@@ -3,17 +3,15 @@ using BenchmarkDotNet.Attributes;
 
 using MediatR.Rpc.Azure.Functions;
 using MediatR.Rpc.Functions.Benchmark.Fakes;
-using MediatR.Rpc.Functions.Benchmark.Requests;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MediatR.Rpc.Functions.Benchmark
 {
-    public class SlimHttpFunctionProcessRequest
+    public class UsingDummyConfigurationWithFakeRunner
     {
         private RpcHttpFunction httpCaller;
 
@@ -23,13 +21,6 @@ namespace MediatR.Rpc.Functions.Benchmark
         [GlobalSetup]
         public void Setup()
         {
-            //Include the proper implementation in the benchmark for more realistic result.
-            //this.runner = new RpcRequestRunner(new FakeSender(), new RpcOptions
-            //{
-            //    MatchingConvention = (t) => t.Name,
-            //    Requests = this.requestFactory.TakeRequestTypes(RegistratedRequestsCount).ToList()
-            //});
-
             IActionResult serializationResult = new OkResult();
             this.httpCaller = new RpcHttpFunction(new RpcHttpFunctionOptions
             {
