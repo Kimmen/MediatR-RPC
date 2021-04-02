@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatR.Extensions.Rpc.Tests.Types
+namespace MediatR.Rpc.Core.Tests.Types
 {
     public static class Nested
     {
